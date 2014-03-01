@@ -12,6 +12,7 @@
     <file path="/SpecRunner.html" changelist="416bcc71-5d5b-4244-9454-3821424ed305" time="1393649919825" ignored="false" />
     <file path="/modella_spec.js" changelist="416bcc71-5d5b-4244-9454-3821424ed305" time="1393709385575" ignored="false" />
     <file path="/a.dummy" changelist="416bcc71-5d5b-4244-9454-3821424ed305" time="1393708614366" ignored="false" />
+    <file path="/readme.md" changelist="416bcc71-5d5b-4244-9454-3821424ed305" time="1393714354236" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,10 +32,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="modella_spec.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="modella_spec.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/spec/modella_spec.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="26" column="31" selection-start="648" selection-end="648" vertical-scroll-proportion="0.17639257">
+            <state line="26" column="31" selection-start="648" selection-end="648" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="e#95#136#0" expanded="false" />
                 <element signature="e#180#235#0" expanded="false" />
@@ -87,6 +88,15 @@
                 <element signature="e#8842#8966#0" expanded="false" />
                 <element signature="e#9049#9173#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="readme.md" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/readme.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="20" column="4" selection-start="967" selection-end="967" vertical-scroll-proportion="0.397878">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -149,6 +159,7 @@
         <option value="$PROJECT_DIR$/spec/SpecRunner.html" />
         <option value="$PROJECT_DIR$/spec/modella_spec.js" />
         <option value="$PROJECT_DIR$/src/modella.js" />
+        <option value="$PROJECT_DIR$/readme.md" />
       </list>
     </option>
   </component>
@@ -189,6 +200,16 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="Modella" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Modella" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Modella" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -432,7 +453,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/spec/modella_spec.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="31" selection-start="648" selection-end="648" vertical-scroll-proportion="0.17639257">
+        <state line="26" column="31" selection-start="648" selection-end="648" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="e#95#136#0" expanded="false" />
             <element signature="e#180#235#0" expanded="false" />
@@ -485,6 +506,13 @@
             <element signature="e#8842#8966#0" expanded="false" />
             <element signature="e#9049#9173#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/readme.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="4" selection-start="967" selection-end="967" vertical-scroll-proportion="0.397878">
+          <folding />
         </state>
       </provider>
     </entry>

@@ -25,9 +25,16 @@
 
         };
 
-    var Modella = {
+    var Modella = function(){};
+
+    Modella.prototype = {
 
         modelConfig: {},
+
+        //Copy constructor
+        create: function(){
+            return Object.create(this);
+        },
 
         //This handles the primary initialization
         init: function(callback){
@@ -42,9 +49,13 @@
                 this.initByObject(this.modelConfig.initialModel, localCallback);
             } else if(typeof this.modelConfig.initialId !== 'undefined'){
                 this.initById(this.modelConfig.initialId, localCallback);
-            }else {
-                localCallback();
+            } else if(typeof this.modelConfig.initialParentId) {
+                this.initByParentId(this.modelConfig.initialParentId, localCallback);
+            } else {
+                //passedCallback(null, Error("Unable to initialize model."));
+                passedCallback();
             }
+
         },
 
         /*
@@ -81,6 +92,39 @@
             this.modelConfig.service.get(id, localCallback);
         },
 
+        initByIds: function(){
+
+        },
+
+        //This requests a dataset from the service by parentId in the config
+        initByParentId: function(parentId, callback){
+            var $this = this,
+                finalModelSet = [],
+                passedCallback = sanitizeCallback(callback),
+                pushModel = function(model){
+                    finalModelSet.push(model);
+                },
+
+                prepareModelSet = function(dataSet){
+                    var index = -1;
+
+                    while(typeof dataSet[++index] !== 'undefined'){
+                        $this.initByObject(dataSet[index], pushModel);
+                    }
+                },
+
+                localCallback = function(modelSet, error){
+                    if(modelSet !== null){
+                        prepareModelSet(modelSet)
+                        passedCallback(finalModelSet);
+                    } else {
+                        passedCallback(null, error);
+                    }
+                };
+
+            this.modelConfig.service.getByParentId(parentId, localCallback);
+        },
+
         //This takes in a finalized data object and applies model functions to it
         initModel: function(modelObject, callback){
             var passedCallback = sanitizeCallback(callback);
@@ -94,7 +138,7 @@
             passedCallback(modelObject);
         }
 
-    }
+    };
 
     $window.modella = Modella;
 

@@ -1,20 +1,42 @@
-describe("Modella", function(){
+describe('Modella', function(){
     'use strict';
 
     var $modella;
 
     beforeEach(function(){
-        $modella = Object.create(window.modella);
+        $modella = new modella();
     });
 
-    it("Should be an object", function(){
+    it('Should be an object', function(){
         expect(typeof $modella).toBe('object');
     });
 
-    describe("init", function(){
+    describe('create', function(){
+
+        it('should be a function', function(){
+            expect(typeof $modella.create).toBe('function');
+        });
+
+        it('should return an instance of a modella object', function(){
+            var modellaInstance = $modella.create();
+            expect(modellaInstance instanceof window.modella).toBe(true);
+        });
+
+    });
+
+    describe('init', function(){
 
         beforeEach(function(){
             $modella.modelConfig = {};
+            $modella.modelConfig.service = {
+                getByParentId: function(parentId, callback){
+                    callback([
+                        {},
+                        {},
+                        {}
+                    ]);
+                }
+            };
         });
 
         it('should be a function', function(){
@@ -22,7 +44,7 @@ describe("Modella", function(){
         });
 
         it('should call the passed callback', function(){
-            var callback = jasmine.createSpy("passedCallback");
+            var callback = jasmine.createSpy('passedCallback');
 
             $modella.init(callback);
 
@@ -42,6 +64,16 @@ describe("Modella", function(){
         it('should call initById when configuration contains an initialId', function(){
             var spyHandle = spyOn($modella, 'initById');
             $modella.modelConfig.initialId = '1234abc';
+
+            $modella.init();
+
+            expect(spyHandle).toHaveBeenCalled();
+        });
+
+        it('should call initByParentId when configuration contains an initialParentId', function(){
+            var spyHandle = spyOn($modella, 'initByParentId');
+
+            $modella.modelConfig.parentId = '1234';
 
             $modella.init();
 
@@ -116,21 +148,100 @@ describe("Modella", function(){
 
     });
 
-    describe("initByObject", function(){
+    describe('initByIds', function(){
 
-        it("should be a function", function(){
+        it('should be a function', function(){
+            expect(typeof $modella.initByIds).toBe('function');
+        });
+
+    });
+    
+    describe('initByParentId', function(){
+
+        beforeEach(function(){
+            $modella.modelConfig.service = {
+                getByParentId: function(parentId, callback){
+                    callback([
+                        {},
+                        {},
+                        {}
+                    ]);
+                }
+            }
+        });
+
+        it('should be a function', function(){
+            expect(typeof $modella.initByParentId).toBe('function');
+        });
+
+        it('should call service.getByParentId', function(){
+
+            var spyHandle = spyOn($modella.modelConfig.service, 'getByParentId');
+
+            $modella.initByParentId('1234abc');
+
+            expect(spyHandle).toHaveBeenCalled();
+
+        });
+
+        it('should call the passed callback', function(){
+            var passedCallback = jasmine.createSpy('passedCallback');
+
+            $modella.initByParentId('1234abc', passedCallback);
+
+            expect(passedCallback).toHaveBeenCalled();
+        });
+
+        it('should call the passed callback with null and an error when the service fails', function(){
+            var passedCallback = jasmine.createSpy('passedCallbcak');
+
+            $modella.modelConfig.service.getByParentId = function(id, callback){
+                callback(null, 'This is an error');
+            }
+
+            $modella.initByParentId('1234abc', passedCallback);
+
+            expect(passedCallback).toHaveBeenCalledWith(null, 'This is an error');
+        });
+
+        it('should call initByObject 3 times when getByParentId returns a 3 element array', function(){
+            var spyHandle = spyOn($modella, 'initByObject');
+
+            $modella.initByParentId('1234abc');
+
+            expect(spyHandle.calls.count()).toBe(3);
+        });
+
+        it("should return an array of 3 model objects", function(){
+            var returnedValue,
+                callback = function(modelSet){
+                    returnedValue = modelSet;
+                };
+
+            $modella.initByParentId('1234abc', callback);
+
+            expect(returnedValue.length).toBe(3);
+        });
+
+
+
+    });
+
+    describe('initByObject', function(){
+
+        it('should be a function', function(){
             expect(typeof $modella.initByObject).toBe('function');
         });
 
-        it("should call the passed callback", function(){
-            var callback = jasmine.createSpy("initCallback");
+        it('should call the passed callback', function(){
+            var callback = jasmine.createSpy('initCallback');
 
             $modella.initByObject({}, callback);
 
             expect(callback).toHaveBeenCalled();
         });
 
-        it("should call the passed callback with an object", function(){
+        it('should call the passed callback with an object', function(){
             var returnedValue,
                 callback = function(model){
                     returnedValue = model;
@@ -141,7 +252,7 @@ describe("Modella", function(){
             expect(typeof returnedValue).toBe('object');
         });
 
-        it("should call $modella.initModel", function(){
+        it('should call $modella.initModel', function(){
             var initModelSpy = spyOn($modella, 'initModel');
 
             $modella.initByObject({});
@@ -151,7 +262,7 @@ describe("Modella", function(){
 
     });
 
-    describe("initModel", function(){
+    describe('initModel', function(){
 
         var returnedValue,
             callback;
@@ -162,43 +273,43 @@ describe("Modella", function(){
             }
         });
 
-        it("should be a function", function(){
+        it('should be a function', function(){
             expect(typeof $modella.initModel).toBe('function');
         });
 
-        it("should call the passed callback", function(){
-            var callback = jasmine.createSpy("passedCallback");
+        it('should call the passed callback', function(){
+            var callback = jasmine.createSpy('passedCallback');
 
             $modella.initModel({}, callback);
 
             expect(callback).toHaveBeenCalled();
         });
 
-        it("should call the passed callback with an object", function(){
+        it('should call the passed callback with an object', function(){
             $modella.initModel({}, callback);
 
             expect(typeof returnedValue).toBe('object');
         });
 
-        it("should return an object with a save function attached", function(){
+        it('should return an object with a save function attached', function(){
             $modella.initModel({}, callback);
 
             expect(typeof returnedValue.save).toBe('function');
         });
 
-        it("should return an object with a delete function attached", function(){
+        it('should return an object with a delete function attached', function(){
             $modella.initModel({}, callback);
 
             expect(typeof returnedValue.delete).toBe('function');
         });
 
-        it("should return an object with a create function attached", function(){
+        it('should return an object with a create function attached', function(){
             $modella.initModel({}, callback);
 
             expect(typeof returnedValue.create).toBe('function');
         })
 
-        it("should return an object with a update function attached", function(){
+        it('should return an object with a update function attached', function(){
             $modella.initModel({}, callback);
 
             expect(typeof returnedValue.update).toBe('function');

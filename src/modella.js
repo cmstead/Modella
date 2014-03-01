@@ -30,17 +30,21 @@
         modelConfig: {},
 
         //This handles the primary initialization
-        init: function(modelDefinition, callback){
+        init: function(callback){
             var config = this.modelConfig,
                 passedCallback = sanitizeCallback(callback),
 
-                localCallback = function(model){
-                    passedCallback(model);
-
-                    config = {};
+                localCallback = function(dataObject, error){
+                    passedCallback(dataObject, error);
                 };
 
-            localCallback();
+            if(typeof this.modelConfig.initialObject !== 'undefined'){
+                this.initByObject(this.modelConfig.initialModel, localCallback);
+            } else if(typeof this.modelConfig.initialId !== 'undefined'){
+                this.initById(this.modelConfig.initialId, localCallback);
+            }else {
+                localCallback();
+            }
         },
 
         /*
@@ -59,6 +63,22 @@
                 };
 
             this.initModel(modelObject, localCallback);
+        },
+
+        //This requests a data object from the service provided in the config
+        initById: function(id, callback){
+            var $this = this,
+                passedCallback = sanitizeCallback(callback),
+
+                localCallback = function(dataObject, error){
+                    if(dataObject !== null){
+                        $this.initByObject(dataObject, passedCallback);
+                    } else {
+                        passedCallback(null, error);
+                    }
+                };
+
+            this.modelConfig.service.get(id, localCallback);
         },
 
         //This takes in a finalized data object and applies model functions to it

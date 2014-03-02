@@ -102,9 +102,9 @@
                 };
             }
 
-        };
+        },
 
-    var Modella = function(){};
+        Modella = function(){};
 
     Modella.prototype = {
 

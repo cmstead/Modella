@@ -13,7 +13,7 @@ that are still in development:
 - [X] Model initialization with a pre-built object
 - [X] Model initialization with a record id
 - [X] Model initialization with a parent record id
-- [ ] Model initialization with an array of record ids
+- [X] Model initialization with an array of record ids
 - [ ] Save functionality on initialized model
 - [ ] Update functionality on initialized model
 - [ ] Delete functionality on initialized model

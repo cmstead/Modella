@@ -73,11 +73,35 @@ describe('Modella', function(){
         it('should call initByParentId when configuration contains an initialParentId', function(){
             var spyHandle = spyOn($modella, 'initByParentId');
 
-            $modella.modelConfig.parentId = '1234';
+            $modella.modelConfig.initialParentId = '1234';
 
             $modella.init();
 
             expect(spyHandle).toHaveBeenCalled();
+        });
+
+        it('should call initByIds when configuration contains initialIds', function(){
+            var spyHandle = spyOn($modella, 'initByIds');
+
+            $modella.modelConfig.initialIds = ['123'];
+
+            $modella.init();
+
+            expect(spyHandle).toHaveBeenCalled();
+        });
+
+        it('should call callback with null and an error if configuration has no initial values', function(){
+            var callValues,
+                callback = function(model, error){
+                    callValues = [
+                        model,
+                        error instanceof Error
+                    ];
+                };
+
+            $modella.init(callback);
+
+            expect(JSON.stringify(callValues)).toBe(JSON.stringify([null, true]));
         });
 
     });
@@ -150,8 +174,72 @@ describe('Modella', function(){
 
     describe('initByIds', function(){
 
+        var idSet;
+
+        beforeEach(function(){
+            $modella.modelConfig = {
+                service: {
+                    get: function(id, callback){
+                        callback({});
+                    }
+                }
+            };
+
+            idSet = ['123', '234', '345'];
+
+        });
+
         it('should be a function', function(){
             expect(typeof $modella.initByIds).toBe('function');
+        });
+
+        it('should call service.get for each record id', function(){
+            var spyHandle = spyOn($modella.modelConfig.service, 'get');
+            $modella.initByIds(idSet);
+
+            expect(spyHandle.calls.count()).toBe(3);
+        });
+
+        it('should call passed callback once', function(){
+            var passedCallback = jasmine.createSpy('passedCallback');
+
+            $modella.initByIds(idSet, passedCallback);
+        });
+
+        it('should return an array of models', function(){
+            var returnedValue,
+                passedCallback = function(modelSet){
+                    returnedValue = modelSet;
+                }
+
+            $modella.initByIds(idSet, passedCallback);
+
+            expect(returnedValue.length).toBe(3);
+        });
+
+        it('should call with null and an error when the service fails', function(){
+            var passedCallback = jasmine.createSpy('passedCallback');
+
+            $modella.modelConfig.service.get = function(id, callback){
+                callback(null, "This is an error.");
+            };
+
+            $modella.initByIds(idSet, passedCallback);
+
+            expect(passedCallback).toHaveBeenCalledWith(null, "This is an error.");
+        });
+
+        it('should call initByObject for each record id', function(){
+            var callTracker = jasmine.createSpy('callTracker');
+
+            $modella.initByObject = function(object, callback){
+                callTracker();
+                callback(object);
+            };
+
+            $modella.initByIds(idSet);
+
+            expect(callTracker.calls.count()).toBe(3);
         });
 
     });

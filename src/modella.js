@@ -49,11 +49,12 @@
                 this.initByObject(this.modelConfig.initialModel, localCallback);
             } else if(typeof this.modelConfig.initialId !== 'undefined'){
                 this.initById(this.modelConfig.initialId, localCallback);
-            } else if(typeof this.modelConfig.initialParentId) {
+            } else if(typeof this.modelConfig.initialParentId !== 'undefined') {
                 this.initByParentId(this.modelConfig.initialParentId, localCallback);
+            } else if(typeof this.modelConfig.initialIds !== 'undefined') {
+                this.initByIds(this.modelConfig.initialIds, localCallback);
             } else {
-                //passedCallback(null, Error("Unable to initialize model."));
-                passedCallback();
+                passedCallback(null, Error("Unable to initialize model."));
             }
 
         },
@@ -92,8 +93,35 @@
             this.modelConfig.service.get(id, localCallback);
         },
 
-        initByIds: function(){
+        //This requests a dataset from the service based on a set of record ids
+        initByIds: function(idSet, callback){
+            var $this = this,
+                index = -1,
+                finalModelSet = [],
+                passedCallback = sanitizeCallback(callback),
 
+                pushModel = function(model){
+                    finalModelSet.push(model);
+                },
+
+                localCallback = function(model, error){
+
+                    if(model !== null){
+                        $this.initByObject(model, pushModel);
+                    } else if(finalModelSet !== null) {
+                        finalModelSet = null;
+                        passedCallback(null, error);
+                    }
+
+                    if(finalModelSet !== null && finalModelSet.length === idSet.length){
+                        passedCallback(finalModelSet);
+                    }
+
+                };
+
+            while(typeof idSet[++index] !== 'undefined'){
+                this.modelConfig.service.get(idSet[index], localCallback);
+            }
         },
 
         //This requests a dataset from the service by parentId in the config

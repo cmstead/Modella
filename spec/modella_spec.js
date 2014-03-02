@@ -11,14 +11,14 @@ describe('Modella', function(){
         expect(typeof $modella).toBe('object');
     });
 
-    describe('create', function(){
+    describe('createInstance', function(){
 
         it('should be a function', function(){
-            expect(typeof $modella.create).toBe('function');
+            expect(typeof $modella.createInstance).toBe('function');
         });
 
         it('should return an instance of a modella object', function(){
-            var modellaInstance = $modella.create();
+            var modellaInstance = $modella.createInstance();
             expect(modellaInstance instanceof window.modella).toBe(true);
         });
 
@@ -379,29 +379,192 @@ describe('Modella', function(){
             expect(typeof returnedValue).toBe('object');
         });
 
-        it('should return an object with a save function attached', function(){
+        it('should return an object with a saveRecord function attached', function(){
             $modella.initModel({}, callback);
 
-            expect(typeof returnedValue.save).toBe('function');
+            expect(typeof returnedValue.saveRecord).toBe('function');
         });
 
-        it('should return an object with a delete function attached', function(){
+        it('should return an object with a deleteRecord function attached', function(){
             $modella.initModel({}, callback);
 
-            expect(typeof returnedValue.delete).toBe('function');
+            expect(typeof returnedValue.deleteRecord).toBe('function');
         });
 
-        it('should return an object with a create function attached', function(){
+        it('should return an object with a createRecord function attached', function(){
             $modella.initModel({}, callback);
 
-            expect(typeof returnedValue.create).toBe('function');
+            expect(typeof returnedValue.createRecord).toBe('function');
         })
 
-        it('should return an object with a update function attached', function(){
+        it('should return an object with a updateRecord function attached', function(){
             $modella.initModel({}, callback);
 
-            expect(typeof returnedValue.update).toBe('function');
+            expect(typeof returnedValue.updateRecord).toBe('function');
         })
+
+    });
+
+});
+
+describe('Modella returned object', function(){
+    var $modella,
+        dataService,
+        configAttributes;
+
+    beforeEach(function(){
+
+        dataService = {
+            post: jasmine.createSpy("service.post"),
+            put: jasmine.createSpy("service.put"),
+            delete: jasmine.createSpy("service.delete")
+        };
+
+        configAttributes = {
+            beforeSave: jasmine.createSpy("beforeSave"),
+            beforeCreate: jasmine.createSpy("beforeCreate"),
+            beforeUpdate: jasmine.createSpy("beforeUpdate"),
+            beforeDelete: jasmine.createSpy("beforeDelete")
+        };
+
+        $modella = new modella();
+
+    });
+
+    describe("model.createRecord", function(){
+
+        var $localModella,
+            $model;
+
+        beforeEach(function(){
+            var modelConfig = {
+                initialObject: {},
+                service: dataService,
+                beforeCreate: configAttributes.beforeCreate
+            };
+
+            $localModella = $modella.createInstance(modelConfig);
+
+            $localModella.init(function(model, error){
+                $model = model;
+            });
+        });
+
+        it('should call service.post', function(){
+            $model.createRecord();
+
+            expect(dataService.post).toHaveBeenCalled();
+        });
+
+        it('should call beforeCreate', function(){
+            $model.createRecord();
+
+            expect(configAttributes.beforeCreate).toHaveBeenCalled();
+        });
+
+    });
+
+    describe("model.updateRecord", function(){
+
+        var $localModella,
+            $model;
+
+        beforeEach(function(){
+            var modelConfig = {
+                initialObject: {},
+                service: dataService,
+                beforeUpdate: configAttributes.beforeUpdate
+            };
+
+            $localModella = $modella.createInstance(modelConfig);
+
+            $localModella.init(function(model, error){
+                $model = model;
+            });
+        });
+
+        it('should call service.put', function(){
+            $model.updateRecord();
+
+            expect(dataService.put).toHaveBeenCalled();
+        });
+
+        it('should call beforeUpdate', function(){
+            $model.updateRecord();
+
+            expect(configAttributes.beforeUpdate).toHaveBeenCalled();
+        });
+
+
+    });
+
+    describe("model.deleteRecord", function(){
+
+        var $localModella,
+            $model;
+
+        beforeEach(function(){
+            var modelConfig = {
+                initialObject: {},
+                service: dataService,
+                beforeDelete: configAttributes.beforeDelete
+            };
+
+            $localModella = $modella.createInstance(modelConfig);
+
+            $localModella.init(function(model, error){
+                $model = model;
+            });
+        });
+
+        it('should call service.delete', function(){
+            $model.deleteRecord();
+
+            expect(dataService.delete).toHaveBeenCalled();
+        });
+
+        it('should call beforeDelete', function(){
+            $model.deleteRecord();
+
+            expect(configAttributes.beforeDelete).toHaveBeenCalled();
+        });
+
+
+    });
+
+    describe("model.saveRecord", function(){
+
+        var $localModella,
+            $model;
+
+        beforeEach(function(){
+            var modelConfig = {
+                initialObject: {},
+                service: dataService
+            };
+
+            $localModella = $modella.createInstance(modelConfig);
+
+            $localModella.init(function(model, error){
+                $model = model;
+            });
+
+            $model.createRecord = jasmine.createSpy("createRecord");
+            $model.updateRecord = jasmine.createSpy("updateRecord");
+        });
+
+        it('should call createRecord if no id exists', function(){
+            $model.saveRecord();
+
+            expect($model.createRecord).toHaveBeenCalled();
+        });
+
+        it('should call updateRecord if id exists', function(){
+            $model.id = "1234";
+            $model.saveRecord();
+
+            expect($model.updateRecord).toHaveBeenCalled();
+        });
 
     });
 

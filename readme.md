@@ -14,9 +14,8 @@ that are still in development:
 - [X] Model initialization with a record id
 - [X] Model initialization with a parent record id
 - [X] Model initialization with an array of record ids
-- [ ] Save functionality on initialized model
-- [ ] Update functionality on initialized model
-- [ ] Delete functionality on initialized model
-- [ ] Inheritable object for model configuration
-- [ ] Abstracted initialization through inheritable object
+- [X] Save functionality on initialized model
+- [X] Update functionality on initialized model
+- [X] Delete functionality on initialized model
+- [X] Inheritable object for model configuration
 - [ ] API documentation

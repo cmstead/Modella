@@ -1,26 +1,105 @@
 (function($window){
+    'use strict';
 
     var sanitizeCallback = function(callback){
             return (typeof callback === 'function') ? callback : function(){};
         },
 
+        sanitizeInterceptor = function(interceptor){
+            return (typeof interceptor !== 'undefined') ? interceptor : function(model){
+                return model;
+            };
+        },
+
+        cleanModel = function(model){
+            //Stringify the model to strip prototype info and functions
+            var $modelStr = JSON.stringify(model);
+            return JSON.parse($modelStr);
+        },
+
         //The methods on this object are meta-functions for producing model behaviors
         modelBuilder = {
 
-            save: function(){
-                return function(){};
+            saveRecord: function(){
+                return function(callback){
+                    var passedCallback = sanitizeCallback(callback);
+
+                    if(!this.id){
+                        this.createRecord(passedCallback);
+                    } else {
+                        this.updateRecord(passedCallback);
+                    }
+                };
             },
 
-            create: function(){
-                return function(){};
+            createRecord: function(modelConfig){
+                var postBehavior = modelConfig.service.post,
+                    interceptor = sanitizeInterceptor(modelConfig.beforeCreate);
+
+                return function(callback){
+                    var $this = this,
+                        passedCallback = sanitizeCallback(callback),
+                        $model = cleanModel(this),
+
+                        localCallback = function(id, error){
+                            if(id !== null){
+                                $this.id = id;
+                                passedCallback(model);
+                            } else {
+                                passedCallback(null, error);
+                            }
+                        };
+
+                    $model = interceptor($model);
+
+                    postBehavior($model, localCallback);
+                };
             },
 
-            update: function(){
-                return function(){};
+            updateRecord: function(modelConfig){
+                var putBehavior = modelConfig.service.put,
+                    interceptor = sanitizeInterceptor(modelConfig.beforeUpdate);
+
+                return function(callback){
+                    var $this = this,
+                        $model = cleanModel(this),
+                        passedCallback = sanitizeCallback(callback),
+
+                        localCallback = function(data, error){
+                            if(data !== null){
+                                passedCallback(model);
+                            } else {
+                                passedCallback(null, error);
+                            }
+                        };
+
+                    $model = interceptor($model);
+
+                    putBehavior($model, localCallback);
+                };
             },
 
-            delete: function(){
-                return function(){};
+            deleteRecord: function(modelConfig){
+                var deleteBehavior = modelConfig.service.delete,
+                    interceptor = sanitizeInterceptor(modelConfig.beforeDelete);
+
+                return function(callback){
+                    var $this = this,
+                        $model = cleanModel(this),
+                        passedCallback = sanitizeCallback(callback),
+
+                        localCallback = function(data, error){
+                            if(data !== null){
+                                passedCallback(model);
+                            } else {
+                                passedCallback(null, error);
+                            }
+                        };
+
+                    $model = interceptor($model);
+
+                    deleteBehavior($model, localCallback);
+                };
             }
 
         };
@@ -32,8 +111,12 @@
         modelConfig: {},
 
         //Copy constructor
-        create: function(){
-            return Object.create(this);
+        createInstance: function(config){
+            var sanitizedConfig = (typeof config !== 'undefined') ? config : {},
+                $modellaObject = Object.create(this);
+
+            $modellaObject.modelConfig = sanitizedConfig;
+            return $modellaObject;
         },
 
         //This handles the primary initialization
@@ -46,7 +129,7 @@
                 };
 
             if(typeof this.modelConfig.initialObject !== 'undefined'){
-                this.initByObject(this.modelConfig.initialModel, localCallback);
+                this.initByObject(this.modelConfig.initialObject, localCallback);
             } else if(typeof this.modelConfig.initialId !== 'undefined'){
                 this.initById(this.modelConfig.initialId, localCallback);
             } else if(typeof this.modelConfig.initialParentId !== 'undefined') {
@@ -157,9 +240,9 @@
         initModel: function(modelObject, callback){
             var passedCallback = sanitizeCallback(callback);
 
-            for(key in modelBuilder){
+            for(var key in modelBuilder){
                 if(modelBuilder.hasOwnProperty(key)){
-                    modelObject[key] = modelBuilder[key]();
+                    modelObject[key] = modelBuilder[key](this.modelConfig);
                 }
             }
 

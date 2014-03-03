@@ -20,14 +20,14 @@ Modella core
 - [X] Update functionality on initialized model
 - [X] Delete functionality on initialized model
 - [X] Inheritable object for model configuration
+- [ ] Service call customization
+- [ ] Create, update and delete customization
 
 Modella abstraction layer
 
 - [ ] Model hierarchy abstraction object
 - [ ] Depth of model construction parameter and management
 - [ ] Model instantiation abstraction layer
-- [ ] Service call customization
-- [ ] Create, update and delete customization
 - [ ] Parent-child relationship configuration
 
 Documentation

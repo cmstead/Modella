@@ -9,6 +9,8 @@ upon object instantiation.
 Modella.js is currently in development. Please refer to the list below regarding items that are complete and items
 that are still in development:
 
+Modella core
+
 - [X] Basic object instantiation
 - [X] Model initialization with a pre-built object
 - [X] Model initialization with a record id
@@ -18,4 +20,16 @@ that are still in development:
 - [X] Update functionality on initialized model
 - [X] Delete functionality on initialized model
 - [X] Inheritable object for model configuration
-- [ ] API documentation
+
+Modella abstraction layer
+
+- [ ] Model hierarchy abstraction object
+- [ ] Depth of model construction parameter and management
+- [ ] Model instantiation abstraction layer
+- [ ] Service call customization
+- [ ] Create, update and delete customization
+
+Documentation
+
+- [ ] Core API documentation
+- [ ] Abstraction layer documentation

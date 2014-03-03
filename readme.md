@@ -11,15 +11,15 @@ that are still in development:
 
 Modella core
 
-- [X] Basic object instantiation
-- [X] Model initialization with a pre-built object
-- [X] Model initialization with a record id
-- [X] Model initialization with a parent record id
-- [X] Model initialization with an array of record ids
-- [X] Save functionality on initialized model
-- [X] Update functionality on initialized model
-- [X] Delete functionality on initialized model
-- [X] Inheritable object for model configuration
+- [x] Basic object instantiation
+- [x] Model initialization with a pre-built object
+- [x] Model initialization with a record id
+- [x] Model initialization with a parent record id
+- [x] Model initialization with an array of record ids
+- [x] Save functionality on initialized model
+- [x] Update functionality on initialized model
+- [x] Delete functionality on initialized model
+- [x] Inheritable object for model configuration
 - [ ] Service call customization
 - [ ] Create, update and delete customization
 

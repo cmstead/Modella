@@ -28,6 +28,7 @@ Modella abstraction layer
 - [ ] Model instantiation abstraction layer
 - [ ] Service call customization
 - [ ] Create, update and delete customization
+- [ ] Parent-child relationship configuration
 
 Documentation
 

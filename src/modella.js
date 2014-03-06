@@ -100,6 +100,24 @@
 
                     deleteBehavior($model, localCallback);
                 };
+            },
+
+            revise: function(){
+                return function(updateObj){
+                    for(var key in this){
+                        if(this.hasOwnProperty(key) && typeof this[key] !== 'function'){
+                            this[key] = (typeof updateObj[key] !== 'undefined') ? updateObj[key] : this[key];
+                        }
+                    }
+                };
+            },
+
+            copy: function(){
+                return function(){
+                    var objectString = JSON.stringify(this);
+
+                    return JSON.parse(objectString);
+                };
             }
 
         },

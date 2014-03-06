@@ -20,10 +20,10 @@ Modella core
 - [x] Update functionality on initialized model
 - [x] Delete functionality on initialized model
 - [x] Inheritable object for model configuration
-- [ ] Service call customization
-- [ ] Create, update and delete customization
+- [x] Model.revise for batch modifying values
+- [x] Model.copy for producing a data-only model copy
 
-Modella abstraction layer
+Modella abstraction object
 
 - [ ] Model hierarchy abstraction object
 - [ ] Depth of model construction parameter and management

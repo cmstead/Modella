@@ -568,4 +568,100 @@ describe('Modella returned object', function(){
 
     });
 
+    describe("model.revise", function(){
+
+        var $localModella,
+            $model;
+
+        beforeEach(function(){
+            var modelConfig = {
+                initialObject: {
+                    test1: "test 1",
+                    test2: "test 2",
+                    test3: "test 3"
+                },
+                service: dataService
+            };
+
+            $localModella = $modella.createInstance(modelConfig);
+
+            $localModella.init(function(model){
+                $model = model;
+            });
+
+        });
+
+        it('should be a function', function(){
+            expect(typeof $model.revise).toBe('function');
+        });
+
+        it('should update values in the model based on passed object', function(){
+            var updateObject = {
+                    test1: "test value 1",
+                    test3: "test value 3"
+                },
+                finalStr;
+
+            $model.revise(updateObject);
+
+            finalStr = $model.test1 + ", " + $model.test3;
+
+            expect(finalStr).toBe("test value 1, test value 3");
+        });
+
+        it('should not update the function values', function(){
+            var updateObj = { saveRecord: 'test' };
+            $model.revise(updateObj);
+
+            expect(typeof $model.saveRecord).toBe('function');
+        });
+
+    });
+
+    describe('model.copy', function(){
+        var $localModella,
+            $model;
+
+        beforeEach(function(){
+            var modelConfig = {
+                initialObject: {
+                    test1: "test 1",
+                    test2: "test 2",
+                    test3: "test 3"
+                },
+                service: dataService
+            };
+
+            $localModella = $modella.createInstance(modelConfig);
+
+            $localModella.init(function(model){
+                $model = model;
+            });
+
+        });
+
+        it('should be a function', function(){
+            expect(typeof $model.copy).toBe('function');
+        });
+
+        it('should return an object matching the stringified original model', function(){
+            var returnedValue = $model.copy();
+
+            expect(JSON.stringify($model)).toBe(JSON.stringify(returnedValue));
+        });
+
+        it('should return an object with no functions attached', function(){
+            var returnedValue = $model.copy(),
+                hasFunction = false;
+
+            for(var key in returnedValue){
+                if(typeof returnedValue[key] === 'function'){
+                    hasFunction = true;
+                }
+            }
+
+            expect(hasFunction).toBe(false);
+        });
+    });
+
 });

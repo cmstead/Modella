@@ -1,17 +1,21 @@
-describe("Modella abstraction layer", function(){
+describe("Modella.extender", function(){
 
     var $modellaWrapper,
         $mockService,
         $initialObject;
 
     beforeEach(function(){
-        $modellaWrapper = modella.abstractor;
+        $modellaWrapper = modella.extender;
         $mockService = {
-            post: function(){},
-            put: function(){},
-            delete: function(){}
+            delete: jasmine.createSpy("service.delete"),
+            get: jasmine.createSpy("service.get"),
+            post: jasmine.createSpy("service.post"),
+            put: jasmine.createSpy("service.put")
         };
-        $initialObject = {};
+        $initialObject = {
+            id: '1234',
+            parent_id: '1234a'
+        };
     });
 
     it("should be an object", function(){
@@ -43,13 +47,25 @@ describe("Modella abstraction layer", function(){
 
     describe("model extension", function(){
 
-        var $returnedModel;
+        var $returnedModel,
+            $parentService,
+            $childService;
 
         beforeEach(function(){
 
+            $parentService = Object.create($mockService);
+            $childService = Object.create($mockService);
+
             var modelConfig = {
-                    parents: ["parent"],
-                    children: ["child"],
+                    parents: [{
+                        name: "parent",
+                        foreignKey: "parent_id",
+                        baseConfig: {}
+                    }],
+                    children: [{
+                        name: "child",
+                        baseConfig: {}
+                    }],
                     service: $mockService,
                     initialObject: $initialObject
                 },
@@ -67,7 +83,11 @@ describe("Modella abstraction layer", function(){
             });
 
             it("should match passed array", function(){
-                expect(JSON.stringify($returnedModel.parents)).toBe(JSON.stringify(["parent"]));
+                expect(JSON.stringify($returnedModel.parents)).toBe(JSON.stringify([{
+                    name: "parent",
+                    foreignKey: "parent_id",
+                    baseConfig: {}
+                }]));
             });
         });
 
@@ -77,7 +97,10 @@ describe("Modella abstraction layer", function(){
             });
 
             it("should match passed array", function(){
-                expect(JSON.stringify($returnedModel.children)).toBe(JSON.stringify(["child"]));
+                expect(JSON.stringify($returnedModel.children)).toBe(JSON.stringify([{
+                    name: "child",
+                    baseConfig: {}
+                }]));
             });
         });
 

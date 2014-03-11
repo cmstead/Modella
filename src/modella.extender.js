@@ -1,7 +1,7 @@
 (function($window){
 
     var extensionProperties = ["parents", "children"],
-        modellaAbstractor;
+        modellaExtender;
 
     function extendModel($config, $model){
         var index = -1,
@@ -17,7 +17,7 @@
         return $model;
     }
 
-    modellaAbstractor = {
+    modellaExtender = {
 
         init: function(config, callback){
             var localModella = new modella(),
@@ -39,5 +39,5 @@
 
     };
 
-    $window.modella.extender = modellaAbstractor;
+    $window.modella.extender = modellaExtender;
 })(window);

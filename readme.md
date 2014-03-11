@@ -25,10 +25,12 @@ Modella core
 
 Modella abstraction object
 
-- [ ] Model hierarchy abstraction object
+- [x] Model instantiation abstraction layer
+- [x] Parent-child relationship configuration
+- [ ] Get parents function
+- [ ] Get children function
+- [ ] Updated clean and copy functions
 - [ ] Depth of model construction parameter and management
-- [ ] Model instantiation abstraction layer
-- [ ] Parent-child relationship configuration
 
 Documentation
 

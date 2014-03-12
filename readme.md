@@ -38,6 +38,7 @@ Modella extension object
 - [x] Get parents function
 - [x] Get children function
 - [x] Updated clean and copy functions
+- [x] Model simple copy to get just the selected layer
 - [ ] Recursive revise behavior
 
 Future release

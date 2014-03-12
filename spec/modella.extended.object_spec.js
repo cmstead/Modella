@@ -110,10 +110,6 @@ describe("Modella extended object", function(){
 
     describe("copy", function(){
 
-        beforeEach(function(){
-
-        });
-
         it("should return a clean copy of the model", function(){
             var returnedValue = $model.copy(),
                 expectedValue = JSON.parse(JSON.stringify($model));
@@ -164,6 +160,64 @@ describe("Modella extended object", function(){
             delete expectedValue.parent.children;
 
             expect(JSON.stringify(returnedValue)).toBe(JSON.stringify(expectedValue));
+        });
+
+    });
+
+    describe("simpleCopy", function(){
+
+        it("should be a function", function(){
+            expect(typeof $model.simpleCopy).toBe('function');
+        });
+
+        it("should clean a model with no relatives", function(){
+            var returnedModel = $model.simpleCopy(),
+                expectedModel = JSON.parse(JSON.stringify($model));
+
+            delete expectedModel.parents;
+            delete expectedModel.children;
+
+            expect(JSON.stringify(returnedModel)).toBe(JSON.stringify(expectedModel));
+        });
+
+        it("should clean children from copied model", function(){
+            var returnedModel,
+                expectedModel;
+
+            $model.children[0].baseConfig.service.getByParentId = function(obj, callback){
+                callback([{}]);
+            };
+
+            $model.getChildren();
+
+            returnedModel = $model.simpleCopy();
+            expectedModel = JSON.parse(JSON.stringify($model));
+
+            delete expectedModel.parents;
+            delete expectedModel.children;
+            delete expectedModel.child;
+
+            expect(JSON.stringify(returnedModel)).toBe(JSON.stringify(expectedModel));
+        });
+
+        it("should clean parents from copied model", function(){
+            var returnedModel,
+                expectedModel;
+
+            $model.parents[0].baseConfig.service.get = function(obj, callback){
+                callback([{}]);
+            };
+
+            $model.getParents();
+
+            returnedModel = $model.simpleCopy();
+            expectedModel = JSON.parse(JSON.stringify($model));
+
+            delete expectedModel.parents;
+            delete expectedModel.children;
+            delete expectedModel.parent;
+
+            expect(JSON.stringify(returnedModel)).toBe(JSON.stringify(expectedModel));
         });
 
     });

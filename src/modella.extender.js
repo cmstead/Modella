@@ -59,6 +59,17 @@
         return sanitizedModel;
     }
 
+    function stripRelatives(sanitizedModel, relativeSet){
+        var key;
+
+        for(var index in relativeSet){
+            key = relativeSet[index].name;
+            delete sanitizedModel[key];
+        }
+
+        return sanitizedModel;
+    }
+
     /*
     *
     * Model relative initialization logic
@@ -140,6 +151,17 @@
 
         return sanitizedModel;
     };
+
+    //A function for copying a simple version of the model without relatives
+    extendedFunctions.simpleCopy = function(){
+        var sanitizedModel = modella.utilities.cleanModel(this);
+
+        sanitizedModel = cleanProperties(sanitizedModel);
+        sanitizedModel = stripRelatives(sanitizedModel, this.children);
+        sanitizedModel = stripRelatives(sanitizedModel, this.parents);
+
+        return sanitizedModel;
+    }
 
     /*
     * Functions to extend the base model

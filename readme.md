@@ -30,6 +30,7 @@ Modella abstraction object
 - [x] Get parents function
 - [x] Get children function
 - [x] Updated clean and copy functions
+- [ ] Updated revise to perform recursive revise behavior
 - [ ] Depth of model construction parameter and management
 
 Documentation

@@ -1,7 +1,7 @@
 Modella.js
 ==========
 
-Modella.js is a data modelling object for JavaScript which is meant to act as an abstraction layer between
+Modella.js is an ORM-like data modelling object for JavaScript which is meant to act as an abstraction layer between
 a simple ORM like Angular's resources or other wire-call service.  The basic CRUD behaviors default to standard
 RESTful post, get, put, delete calls, but some extended methods are included.  Speciallized CRUD calls can be configured
 upon object instantiation.
@@ -23,6 +23,8 @@ Modella core
 - [x] Model.revise for batch modifying values
 - [x] Model.copy for producing a data-only model copy
 
+- [ ] Save only on dirty (Planned for future release)
+
 Modella extension object
 
 - [x] Model instantiation abstraction layer
@@ -30,7 +32,10 @@ Modella extension object
 - [x] Get parents function
 - [x] Get children function
 - [x] Updated clean and copy functions
-- [ ] Updated revise to perform recursive revise behavior
+- [ ] Recursive revise behavior
+
+- [ ] Recursive saveAll (Planned for future release)
+- [ ] Recursive deleteAll (Planned for future release)
 
 Modella configuration object
 
@@ -40,6 +45,6 @@ Modella configuration object
 
 Documentation
 
-- [ ] Core API documentation
+- [ ] Core API documentation -- underway
 - [ ] Extension layer documentation
 - [ ] Configuration layer documentation

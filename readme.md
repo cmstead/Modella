@@ -23,7 +23,7 @@ Modella core
 - [x] Model.revise for batch modifying values
 - [x] Model.copy for producing a data-only model copy
 
-Modella abstraction object
+Modella extension object
 
 - [x] Model instantiation abstraction layer
 - [x] Parent-child relationship configuration
@@ -31,9 +31,15 @@ Modella abstraction object
 - [x] Get children function
 - [x] Updated clean and copy functions
 - [ ] Updated revise to perform recursive revise behavior
+
+Modella configuration object
+
+- [ ] Inheritable base configuration object
+- [ ] Configuration export/import for parent/child handling
 - [ ] Depth of model construction parameter and management
 
 Documentation
 
 - [ ] Core API documentation
-- [ ] Abstraction layer documentation
+- [ ] Extension layer documentation
+- [ ] Configuration layer documentation

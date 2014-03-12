@@ -114,9 +114,7 @@
 
             copy: function(){
                 return function(){
-                    var objectString = JSON.stringify(this);
-
-                    return JSON.parse(objectString);
+                    return cleanModel(this);
                 };
             }
 

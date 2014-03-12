@@ -107,4 +107,64 @@ describe("Modella extended object", function(){
         });
 
     });
+
+    describe("copy", function(){
+
+        beforeEach(function(){
+
+        });
+
+        it("should return a clean copy of the model", function(){
+            var returnedValue = $model.copy(),
+                expectedValue = JSON.parse(JSON.stringify($model));
+
+            delete expectedValue.parents;
+            delete expectedValue.children;
+
+            expect(JSON.stringify(returnedValue)).toBe(JSON.stringify(expectedValue));
+        });
+
+        it("should clean any child objects on the model", function(){
+            var returnedValue,
+                expectedValue;
+
+            $model.children[0].baseConfig.service.getByParentId = function(obj, callback){
+                callback([{}]);
+            };
+
+            $model.getChildren();
+
+            returnedValue = $model.copy();
+            expectedValue = JSON.parse(JSON.stringify($model));
+
+            delete expectedValue.parents;
+            delete expectedValue.children;
+            delete expectedValue.child[0].parents;
+            delete expectedValue.child[0].children;
+
+            expect(JSON.stringify(returnedValue)).toBe(JSON.stringify(expectedValue));
+        });
+
+        it("should clean any parent objects on the model", function(){
+            var returnedValue,
+                expectedValue;
+
+            $model.parents[0].baseConfig.service.get = function(obj, callback){
+                callback({});
+            };
+
+            $model.getParents();
+
+            returnedValue = $model.copy();
+            expectedValue = JSON.parse(JSON.stringify($model));
+
+            delete expectedValue.parents;
+            delete expectedValue.children;
+            delete expectedValue.parent.parents;
+            delete expectedValue.parent.children;
+
+            expect(JSON.stringify(returnedValue)).toBe(JSON.stringify(expectedValue));
+        });
+
+    });
 });

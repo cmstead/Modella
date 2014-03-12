@@ -1,4 +1,5 @@
 (function($window){
+    'use strict';
 
     var extensionProperties = ["parents", "children"],
         modellaExtender,
@@ -22,46 +23,113 @@
         return callback;
     }
 
-    extendedFunctions.getParents = function(passedCallback){
-        var index = -1,
-            modelExtender = modella.extender,
+    function cleanChildArray(childArray){
+        var finalArray = [],
+            childCopy;
+
+        for(var index in childArray){
+            childCopy = childArray[index].copy();
+            finalArray.push(childCopy);
+        }
+
+        return finalArray;
+    }
+
+    function cleanChildren(sanitizedModel, model){
+        var key;
+
+        for(var index in model.children){
+
+            key = model.children[index].name;
+
+            if(model[key] && model[key].length){
+                sanitizedModel[key] = cleanChildArray(model[key]);
+            }
+
+        }
+
+        return sanitizedModel;
+    }
+
+    function cleanParents(sanitizedModel, model){
+        var key;
+
+        for(var index in model.parents){
+
+            key = model.parents[index].name;
+
+            if(model[key]){
+                sanitizedModel[key] = model[key].copy();
+            }
+
+        }
+
+        return sanitizedModel;
+    }
+
+    function cleanModel(model){
+        var propertyKey,
+            sanitizedModel = JSON.parse(JSON.stringify(model));
+
+        for(var index in extensionProperties){
+            propertyKey = extensionProperties[index];
+            delete sanitizedModel[propertyKey];
+        }
+
+        if(model.children){
+            sanitizedModel = cleanChildren(sanitizedModel, model);
+        }
+
+        if(model.parents){
+            sanitizedModel = cleanParents(sanitizedModel, model);
+        }
+
+        return sanitizedModel;
+    }
+
+    function setInitialCondition(config, record, $model){
+        if(typeof record.foreignKey !== 'undefined'){
+            config.initialId = $model[record.foreignKey];
+        } else {
+            config.initialParentId = $model.id;
+        }
+    }
+
+    function getRelatives(dataConfigArray, $modelObj, passedCallback){
+        var modelExtender = modella.extender,
             tempConfig,
             tempCallback,
-            parentRecord;
+            tempRecord;
 
-        while(typeof this.parents[++index] !== 'undefined'){
-            parentRecord = this.parents[index];
+        passedCallback = sanitizeCallback(passedCallback);
 
-            tempCallback = buildCallback(this, parentRecord.name, passedCallback);
+        for(var index in dataConfigArray){
 
-            tempConfig = parentRecord.baseConfig;
-            tempConfig.initialId = this[parentRecord.foreignKey];
+            tempRecord = dataConfigArray[index];
+            tempCallback = buildCallback($modelObj, tempRecord.name, passedCallback);
+            tempConfig = tempRecord.baseConfig;
+
+            setInitialCondition(tempConfig, tempRecord, $modelObj);
 
             modelExtender.init(tempConfig, tempCallback);
+
         }
+    }
+
+    extendedFunctions.getParents = function(passedCallback){
+        getRelatives(this.parents, this, passedCallback);
     };
 
     extendedFunctions.getChildren = function(passedCallback){
-        var index = -1,
-            modelExtender = modella.extender,
-            tempConfig,
-            tempCallback,
-            childRecord;
+        getRelatives(this.children, this, passedCallback);
+    };
 
-        while(typeof this.children[++index] !== 'undefined'){
-            childRecord = this.children[index];
-
-            tempCallback = buildCallback(this, childRecord.name, passedCallback);
-
-            tempConfig = childRecord.baseConfig;
-            tempConfig.initialParentId = this.id;
-
-            modelExtender.init(tempConfig, tempCallback);
-        }
+    extendedFunctions.copy = function(){
+        return cleanModel(this);
     };
 
     function appendExtendedFunctions($model){
-        for(key in extendedFunctions){
+        for(var key in extendedFunctions){
             if(extendedFunctions.hasOwnProperty(key)){
                 $model[key] = extendedFunctions[key];
             }
@@ -71,11 +139,10 @@
     }
 
     function extendModel($config, $model){
-        var index = -1,
-            key,
+        var key,
             tempValue;
 
-        while(typeof extensionProperties[++index] !== 'undefined'){
+        for(var index in extensionProperties){
             key = extensionProperties[index];
             tempValue = (typeof $config[key] !== 'undefined') ? $config[key] : null;
             $model[key] = tempValue;
@@ -94,8 +161,12 @@
 
                 localCallback = function($passedModel, $error){
                     var finalModel = $passedModel;
-                    if(finalModel){
+                    if(finalModel && typeof finalModel[0] === 'undefined'){
                         finalModel = extendModel(config, finalModel);
+                    } else if(finalModel){
+                        for(var index in finalModel){
+                            finalModel[index] = extendModel(config, finalModel[index]);
+                        }
                     }
 
                     sanitizedCallback(finalModel, $error);

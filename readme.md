@@ -29,7 +29,7 @@ Modella abstraction object
 - [x] Parent-child relationship configuration
 - [x] Get parents function
 - [x] Get children function
-- [ ] Updated clean and copy functions
+- [x] Updated clean and copy functions
 - [ ] Depth of model construction parameter and management
 
 Documentation

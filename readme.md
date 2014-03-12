@@ -6,6 +6,8 @@ a simple ORM like Angular's resources or other wire-call service.  The basic CRU
 RESTful post, get, put, delete calls, but some extended methods are included.  Speciallized CRUD calls can be configured
 upon object instantiation.
 
+For the (currently under development) documentation, please visit the [Modella wiki](https://github.com/cmstead/Modella/wiki).
+
 Modella.js is currently in development. Please refer to the list below regarding items that are complete and items
 that are still in development:
 

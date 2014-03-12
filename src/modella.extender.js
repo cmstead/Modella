@@ -17,51 +17,44 @@
     *
     */
 
-    //Cycles through all items in a configured child array and copies it, scrubbing model properties.
-    function cleanChildArray(childArray){
+    //Cycles through all items in a configured array and copies it, scrubbing model properties.
+    function cleanModelSet(modelSet){
         var finalArray = [],
-            childCopy;
+            recordCopy;
 
-        for(var index in childArray){
-            childCopy = childArray[index].copy();
-            finalArray.push(childCopy);
+        for(var index in modelSet){
+            recordCopy = modelSet[index].copy();
+            finalArray.push(recordCopy);
         }
 
         return finalArray;
     }
 
-    //Cycles through all configured children sets and cleans/copies all elements in the array.
-    function cleanChildren(sanitizedModel, model){
+    //Cleans relatives from a passed set
+    function cleanRelatives(sanitizedModel, model, relativeSet){
         var key;
 
-        for(var index in model.children){
+        for(var index in relativeSet){
+            key = relativeSet[index].name;
 
-            key = model.children[index].name;
-
-            if(model[key] && model[key].length){
-                sanitizedModel[key] = cleanChildArray(model[key]);
+            if(model[key] && Object.prototype.toString.call(model[key]) === '[object Array]'){
+                sanitizedModel[key] = cleanModelSet(model[key]);
+            } else if (model[key]){
+                sanitizedModel[key] = model[key].copy();
             }
-
         }
 
         return sanitizedModel;
     }
 
+    //Cycles through all configured children sets and cleans/copies all elements in the array.
+    function cleanChildren(sanitizedModel, model){
+        return cleanRelatives(sanitizedModel, model, model.children);
+    }
+
     //Cleans and copies all parent objects
     function cleanParents(sanitizedModel, model){
-        var key;
-
-        for(var index in model.parents){
-
-            key = model.parents[index].name;
-
-            if(model[key]){
-                sanitizedModel[key] = model[key].copy();
-            }
-
-        }
-
-        return sanitizedModel;
+        return cleanRelatives(sanitizedModel, model, model.parents);
     }
 
     //Cleans all extended properties from sanitized model
@@ -99,7 +92,7 @@
     */
 
     //Curries a function to handle appending data to the existing object
-    function buildCallback(object, key, passedCallback){
+    function buildDataAppenderCallback(object, key, passedCallback){
         var localCallback = sanitizeCallback(passedCallback);
 
         function callback(data, error){
@@ -134,7 +127,7 @@
         for(var index in dataConfigArray){
 
             tempRecord = dataConfigArray[index];
-            tempCallback = buildCallback($modelObj, tempRecord.name, passedCallback);
+            tempCallback = buildDataAppenderCallback($modelObj, tempRecord.name, passedCallback);
             tempConfig = tempRecord.baseConfig;
 
             setInitialCondition(tempConfig, tempRecord, $modelObj);
@@ -162,7 +155,6 @@
     extendedFunctions.copy = function(){
         return cleanModel(this);
     };
-
 
     /*
     * Functions to extend the base model
@@ -215,6 +207,7 @@
 
                 localCallback = function($passedModel, $error){
                     var finalModel = $passedModel;
+
                     if(finalModel && typeof finalModel[0] === 'undefined'){
                         finalModel = extendModel(config, finalModel);
                     } else if(finalModel){

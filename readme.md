@@ -10,6 +10,7 @@ Modella.js is currently in development. Please refer to the list below regarding
 that are still in development:
 
 Modella core
+============
 
 - [x] Basic object instantiation
 - [x] Model initialization with a pre-built object
@@ -23,9 +24,12 @@ Modella core
 - [x] Model.revise for batch modifying values
 - [x] Model.copy for producing a data-only model copy
 
-- [ ] Save only on dirty (Planned for future release)
+Future release
+
+- [ ] Save only on dirty
 
 Modella extension object
+========================
 
 - [x] Model instantiation abstraction layer
 - [x] Parent-child relationship configuration
@@ -34,16 +38,20 @@ Modella extension object
 - [x] Updated clean and copy functions
 - [ ] Recursive revise behavior
 
-- [ ] Recursive saveAll (Planned for future release)
-- [ ] Recursive deleteAll (Planned for future release)
+Future release
+
+- [ ] Recursive saveAll
+- [ ] Recursive deleteAll
 
 Modella configuration object
+============================
 
 - [ ] Inheritable base configuration object
 - [ ] Configuration export/import for parent/child handling
 - [ ] Depth of model construction parameter and management
 
 Documentation
+=============
 
 - [ ] Core API documentation -- underway
 - [ ] Extension layer documentation

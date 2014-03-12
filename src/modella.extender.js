@@ -30,6 +30,18 @@
         return finalArray;
     }
 
+    //Cleans all extended properties from sanitized model
+    function cleanProperties(sanitizedModel){
+        var key;
+
+        for(var index in extensionProperties){
+            key = extensionProperties[index];
+            delete sanitizedModel[key];
+        }
+
+        return sanitizedModel;
+    }
+
     //Cleans relatives from a passed set
     function cleanRelatives(sanitizedModel, model, relativeSet){
         var key;
@@ -43,39 +55,6 @@
                 sanitizedModel[key] = model[key].copy();
             }
         }
-
-        return sanitizedModel;
-    }
-
-    //Cycles through all configured children sets and cleans/copies all elements in the array.
-    function cleanChildren(sanitizedModel, model){
-        return cleanRelatives(sanitizedModel, model, model.children);
-    }
-
-    //Cleans and copies all parent objects
-    function cleanParents(sanitizedModel, model){
-        return cleanRelatives(sanitizedModel, model, model.parents);
-    }
-
-    //Cleans all extended properties from sanitized model
-    function cleanProperties(sanitizedModel){
-        var key;
-
-        for(var index in extensionProperties){
-            key = extensionProperties[index];
-            delete sanitizedModel[key];
-        }
-
-        return sanitizedModel;
-    }
-
-    //Copies and returns a scrubbed model tree
-    function cleanModel(model){
-        var sanitizedModel = modella.utilities.cleanModel(model);
-
-        sanitizedModel = cleanProperties(sanitizedModel);
-        sanitizedModel = cleanChildren(sanitizedModel, model);
-        sanitizedModel = cleanParents(sanitizedModel, model);
 
         return sanitizedModel;
     }
@@ -153,7 +132,13 @@
 
     //An update to the copy function to remove all core and extended model properties
     extendedFunctions.copy = function(){
-        return cleanModel(this);
+        var sanitizedModel = modella.utilities.cleanModel(this);
+
+        sanitizedModel = cleanProperties(sanitizedModel);
+        sanitizedModel = cleanRelatives(sanitizedModel, this, this.children);
+        sanitizedModel = cleanRelatives(sanitizedModel, this, this.parents);
+
+        return sanitizedModel;
     };
 
     /*

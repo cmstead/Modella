@@ -271,6 +271,7 @@
 
     $window.modella.utilities = {
         sanitizeCallback: sanitizeCallback,
+        sanitizeInterceptor: sanitizeInterceptor,
         cleanModel: cleanModel
     };
 

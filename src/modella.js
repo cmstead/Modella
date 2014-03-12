@@ -269,4 +269,9 @@
 
     $window.modella = Modella;
 
+    $window.modella.utilities = {
+        sanitizeCallback: sanitizeCallback,
+        cleanModel: cleanModel
+    };
+
 })(window);

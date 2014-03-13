@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="416bcc71-5d5b-4244-9454-3821424ed305" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/Modella.iml" afterPath="$PROJECT_DIR$/.idea/Modella.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="416bcc71-5d5b-4244-9454-3821424ed305" name="Default" comment="" />
     <ignored path="Modella.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/Dummy.txt" changelist="416bcc71-5d5b-4244-9454-3821424ed305" time="1394659363745" ignored="false" />
@@ -17,6 +14,7 @@
     <file path="/modella.abstraction_spec.js" changelist="416bcc71-5d5b-4244-9454-3821424ed305" time="1394570026894" ignored="false" />
     <file path="/modella.extended.object_spec.js" changelist="416bcc71-5d5b-4244-9454-3821424ed305" time="1394672296818" ignored="false" />
     <file path="/modella.extender.js" changelist="416bcc71-5d5b-4244-9454-3821424ed305" time="1394672240200" ignored="false" />
+    <file path="/MinSpecRunner.html" changelist="416bcc71-5d5b-4244-9454-3821424ed305" time="1394691006600" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,10 +52,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="modella.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="modella.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/modella.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="277" column="11" selection-start="9753" selection-end="9753" vertical-scroll-proportion="0.37153652">
+            <state line="277" column="11" selection-start="9753" selection-end="9753" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="e#84#174#0" expanded="false" />
                 <element signature="e#228#373#0" expanded="false" />
@@ -128,6 +126,15 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="MinSpecRunner.html" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/spec/MinSpecRunner.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="14" column="63" selection-start="680" selection-end="680" vertical-scroll-proportion="0.27272728">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="modella.extended.object_spec.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/spec/modella.extended.object_spec.js">
           <provider selected="true" editor-type-id="text-editor">
@@ -167,6 +174,7 @@
         <option value="$PROJECT_DIR$/spec/modella.extended.object_spec.js" />
         <option value="$PROJECT_DIR$/src/modella.extender.js" />
         <option value="$PROJECT_DIR$/src/modella.js" />
+        <option value="$PROJECT_DIR$/spec/MinSpecRunner.html" />
       </list>
     </option>
   </component>
@@ -744,11 +752,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/spec/SpecRunner.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="65" selection-start="1008" selection-end="1008" vertical-scroll-proportion="0.38961038" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/spec/modella.extender_spec.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="45" column="7" selection-start="1280" selection-end="1280" vertical-scroll-proportion="0.18639798">
@@ -858,7 +861,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/modella.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="277" column="11" selection-start="9753" selection-end="9753" vertical-scroll-proportion="0.37153652">
+        <state line="277" column="11" selection-start="9753" selection-end="9753" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="e#84#174#0" expanded="false" />
             <element signature="e#228#373#0" expanded="false" />
@@ -925,6 +928,20 @@
             <element signature="e#9372#9467#0" expanded="false" />
             <element signature="e#9607#9739#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spec/SpecRunner.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="65" selection-start="0" selection-end="1061" vertical-scroll-proportion="0.38961038">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spec/MinSpecRunner.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="63" selection-start="680" selection-end="680" vertical-scroll-proportion="0.27272728">
+          <folding />
         </state>
       </provider>
     </entry>

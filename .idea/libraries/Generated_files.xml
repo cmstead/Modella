@@ -1,0 +1,18 @@
+<component name="libraryTable">
+  <library name="Generated files" type="javaScript">
+    <properties>
+      <sourceFilesUrls>
+        <item url="file://$PROJECT_DIR$/src/modella.extender.min.js" />
+        <item url="file://$PROJECT_DIR$/src/modella.extender.min.js" />
+      </sourceFilesUrls>
+    </properties>
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/spec/modella.extended.object_spec.min.js" />
+      <root url="file://$PROJECT_DIR$/spec/modella.extended.object_spec.min.js" />
+      <root url="file://$PROJECT_DIR$/spec/modella.extended.object_spec.min.js" />
+      <root url="file://$PROJECT_DIR$/src/modella.extender.min.js" />
+      <root url="file://$PROJECT_DIR$/src/modella.extender.min.js" />
+    </CLASSES>
+    <SOURCES />
+  </library>
+</component>

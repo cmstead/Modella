@@ -2,7 +2,7 @@ Modella.js
 ==========
 
 Modella.js is an ORM-like data modelling object for JavaScript which is meant to act as an abstraction layer between
-a simple ORM like Angular's resources or other wire-call service.  The basic CRUD behaviors default to standard
+a simple ORM like Angular's resources or other network request service.  The basic CRUD behaviors default to standard
 RESTful post, get, put, delete calls, but some extended methods are included.  Speciallized CRUD calls can be configured
 upon object instantiation.
 

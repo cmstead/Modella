@@ -5,7 +5,17 @@
     var modellaExtender,
         extensionProperties = ["parents", "children"],
         extendedFunctions = {},
-        sanitizeCallback = modella.utilities.sanitizeCallback;
+        sanitizeCallback = modella.utilities.sanitizeCallback,
+        sortById = function(recordA, recordB){
+            var sortDirection = 0,
+                idsExist = (recordA.id && recordB.id);
+
+            sortDirection = (idsExist && recordA.id > recordB.id) ? 1 : sortDirection;
+            sortDirection = (idsExist && recordA.id < recordB.id) ? -1 : sortDirection;
+            sortDirection = (!idsExist && !recordA.id) ? -1 : sortDirection;
+
+            return sortDirection;
+        };
 
     /*
     *
@@ -59,6 +69,7 @@
         return sanitizedModel;
     }
 
+    //Strips non-core model objects from current model
     function stripRelatives(sanitizedModel, relativeSet){
         var key;
 
@@ -128,6 +139,69 @@
     }
 
     /*
+    * Revise-related functions
+    */
+
+    function getRelativesList(model){
+        var key,
+            relativesList = {};
+
+        for(var index in model.parents){
+            key = model.parents[index].name;
+            relativesList[key] = true;
+        }
+
+        for(var index in model.children){
+            key = model.children[index].name;
+            relativesList[key] = true;
+        }
+
+        return relativesList;
+    }
+
+    function findMatchingRecord(id, recordSet){
+        var matchingRecord = null;
+
+        for(var index in recordSet){
+            if(recordSet[index].id && recordSet[index].id === id){
+                matchingRecord = recordSet[index];
+                break;
+            }
+        }
+
+        return matchingRecord;
+    }
+
+    function updateRelativeSet(modelArray, updateArray){
+        var matchingRecord = null;
+
+        modelArray.sort(sortById);
+        updateArray.sort(sortById);
+
+        //This is not the most efficient way to go about this.
+        for(var index in modelArray){
+
+            if(!modelArray[index].id){
+                continue;
+            }
+
+            matchingRecord = findMatchingRecord(modelArray[index].id, updateArray);
+
+            if(matchingRecord !== null){
+                modelArray[index].revise(matchingRecord);
+            }
+        }
+    }
+
+    function updateRelative(modelObj, updateObj){
+        if(Object.prototype.toString.call(modelObj) === '[object Array]'){
+            updateRelativeSet(modelObj, updateObj);
+        } else {
+            modelObj.revise(updateObj);
+        }
+    }
+
+    /*
     * Defining extended functionality to append to the initialized model
     */
 
@@ -161,6 +235,19 @@
         sanitizedModel = stripRelatives(sanitizedModel, this.parents);
 
         return sanitizedModel;
+    }
+
+    //An update to the revise function to update values based on passed object
+    extendedFunctions.revise = function(updateObj){
+        var relativesList = getRelativesList(this);
+
+        for(var key in updateObj){
+            if(!relativesList[key] && this.hasOwnProperty(key)){
+                this[key] = updateObj[key];
+            } else if(relativesList[key] && this.hasOwnProperty(key)){
+                updateRelative(this[key], updateObj[key]);
+            }
+        }
     }
 
     /*

@@ -5,17 +5,7 @@
     var modellaExtender,
         extensionProperties = ["parents", "children"],
         extendedFunctions = {},
-        sanitizeCallback = modella.utilities.sanitizeCallback,
-        sortById = function(recordA, recordB){
-            var sortDirection = 0,
-                idsExist = (recordA.id && recordB.id);
-
-            sortDirection = (idsExist && recordA.id > recordB.id) ? 1 : sortDirection;
-            sortDirection = (idsExist && recordA.id < recordB.id) ? -1 : sortDirection;
-            sortDirection = (!idsExist && !recordA.id) ? -1 : sortDirection;
-
-            return sortDirection;
-        };
+        sanitizeCallback = modella.utilities.sanitizeCallback;
 
     /*
     *
@@ -142,6 +132,7 @@
     * Revise-related functions
     */
 
+    //Compile an object with parent/child name values as keys for testing
     function getRelativesList(model){
         var key,
             relativesList = {};
@@ -159,6 +150,7 @@
         return relativesList;
     }
 
+    //Locate record matching id in set of records
     function findMatchingRecord(id, recordSet){
         var matchingRecord = null;
 
@@ -172,11 +164,9 @@
         return matchingRecord;
     }
 
+    //Update a set of models with a set of updated values
     function updateRelativeSet(modelArray, updateArray){
         var matchingRecord = null;
-
-        modelArray.sort(sortById);
-        updateArray.sort(sortById);
 
         //This is not the most efficient way to go about this.
         for(var index in modelArray){
@@ -193,6 +183,7 @@
         }
     }
 
+    //Handle parent/child update behavior
     function updateRelative(modelObj, updateObj){
         if(Object.prototype.toString.call(modelObj) === '[object Array]'){
             updateRelativeSet(modelObj, updateObj);

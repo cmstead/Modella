@@ -40,6 +40,7 @@ Modella extension object
 - [x] Model simple copy to get just the selected layer
 - [x] Recursive copy behavior
 - [x] Recursive revise behavior
+- [ ] Recursive init with deep initial object
 
 Future release
 

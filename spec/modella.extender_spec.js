@@ -43,6 +43,69 @@ describe("Modella.extender", function(){
             expect(typeof $returnedObject).toBe("object");
         });
 
+        it("should initialize all child objects", function(){
+            var functionsExist = true,
+                $model,
+                callback = function(createdObj){
+                    $model = createdObj;
+                },
+                config = {
+                    service: $mockService,
+                    children: [{
+                        name: "child",
+                        service: Object.create($mockService)
+                    }]
+                };
+
+            config.initialObject = $initialObject;
+            config.initialObject.child = [{
+                id: '5678',
+                parentId: '1234'
+            }];
+
+            $modellaWrapper.init(config, callback);
+
+            functionsExist = (typeof $model.child[0].createRecord !== "function") ? false : functionsExist;
+            functionsExist = (typeof $model.child[0].updateRecord !== "function") ? false : functionsExist;
+            functionsExist = (typeof $model.child[0].deleteRecord !== "function") ? false : functionsExist;
+            functionsExist = (typeof $model.child[0].copy !== "function") ? false : functionsExist;
+            functionsExist = (typeof $model.child[0].revise !== "function") ? false : functionsExist;
+
+            expect(functionsExist).toBe(true);
+        });
+
+        it("should initialize all parent objects", function(){
+            var functionsExist = true,
+                $model,
+                callback = function(createdObj){
+                    $model = createdObj;
+                },
+                config = {
+                    service: $mockService,
+                    parents: [{
+                        name: "parent",
+                        foreignKey: "parent_id",
+                        service: Object.create($mockService)
+                    }]
+                };
+
+            config.initialObject = $initialObject;
+            config.initialObject.parent = {
+                id: '5678',
+                parentId: '1234'
+            };
+
+            $modellaWrapper.init(config, callback);
+
+            functionsExist = (typeof $model.parent.createRecord !== "function") ? false : functionsExist;
+            functionsExist = (typeof $model.parent.updateRecord !== "function") ? false : functionsExist;
+            functionsExist = (typeof $model.parent.deleteRecord !== "function") ? false : functionsExist;
+            functionsExist = (typeof $model.parent.copy !== "function") ? false : functionsExist;
+            functionsExist = (typeof $model.parent.revise !== "function") ? false : functionsExist;
+
+            expect(functionsExist).toBe(true);
+        });
+
     });
 
     describe("model extension", function(){

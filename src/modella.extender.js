@@ -72,63 +72,6 @@
     }
 
     /*
-    *
-    * Model relative initialization logic
-    *
-    * The following functions set initial conditions for initializing parent and child entities
-    * to attach to the current model. This includes preparing a callback for properly
-    * inserting the new entities into the model and intelligently setting initial conditions
-    * based upon the type of relative requested.
-    *
-    */
-
-    //Curries a function to handle appending data to the existing object
-    function buildDataAppenderCallback(object, key, passedCallback){
-        var localCallback = sanitizeCallback(passedCallback);
-
-        function callback(data, error){
-            if(data !== null){
-                object[key] = data;
-            }
-
-            localCallback(data, error);
-        }
-
-        return callback;
-    }
-
-    //Sets initial condition for requesting a parent or child model
-    function setInitialCondition(config, record, $model){
-        if(typeof record.foreignKey !== 'undefined'){
-            config.initialId = $model[record.foreignKey];
-        } else {
-            config.initialParentId = $model.id;
-        }
-    }
-
-    //Generic function for requesting either children or parents of current model
-    function getRelatives(dataConfigArray, $modelObj, passedCallback){
-        var modelExtender = modella.extender,
-            tempConfig,
-            tempCallback,
-            tempRecord;
-
-        passedCallback = sanitizeCallback(passedCallback);
-
-        for(var index in dataConfigArray){
-
-            tempRecord = dataConfigArray[index];
-            tempCallback = buildDataAppenderCallback($modelObj, tempRecord.name, passedCallback);
-            tempConfig = tempRecord.baseConfig;
-
-            setInitialCondition(tempConfig, tempRecord, $modelObj);
-
-            modelExtender.init(tempConfig, tempCallback);
-
-        }
-    }
-
-    /*
     * Revise-related functions
     */
 
@@ -139,12 +82,12 @@
 
         for(var index in model.parents){
             key = model.parents[index].name;
-            relativesList[key] = true;
+            relativesList[key] = 'parent';
         }
 
         for(var index in model.children){
             key = model.children[index].name;
-            relativesList[key] = true;
+            relativesList[key] = 'child';
         }
 
         return relativesList;
@@ -189,6 +132,125 @@
             updateRelativeSet(modelObj, updateObj);
         } else {
             modelObj.revise(updateObj);
+        }
+    }
+
+    /*
+     *
+     * Model relative initialization logic
+     *
+     * The following functions set initial conditions for initializing parent and child entities
+     * to attach to the current model. This includes preparing a callback for properly
+     * inserting the new entities into the model and intelligently setting initial conditions
+     * based upon the type of relative requested.
+     *
+     */
+
+    //Curries a function to handle appending data to the existing object
+    function buildDataAppenderCallback(object, key, passedCallback){
+        var localCallback = sanitizeCallback(passedCallback);
+
+        function callback(data, error){
+            if(data !== null){
+                object[key] = data;
+            }
+
+            localCallback(data, error);
+        }
+
+        return callback;
+    }
+
+    function getBaseConfig($model, objectType, name){
+        var configLocation = (objectType === 'parent') ? "parents" : "children",
+            key,
+            baseConfig;
+
+        for(key in $model[configLocation]){
+            if(name === $model[configLocation][key].name){
+                baseConfig = $model[configLocation][key];
+            }
+        }
+
+        return baseConfig;
+    }
+
+    //Sets initial condition for requesting a parent or child model
+    function setInitialCondition(config, record, $model){
+        if(typeof record.foreignKey !== 'undefined'){
+            config.initialId = $model[record.foreignKey];
+        } else {
+            config.initialParentId = $model.id;
+        }
+    }
+
+    //Checks need for initialization
+    function checkRelativeNeedsInitialization(relativeObject){
+        var needsInitialization = typeof relativeObject === 'object';
+
+        return (Object.prototype.toString.call(relativeObject) === '[object Array]' && !relativeObject.length) ?
+            false : needsInitialization;
+    }
+
+    //Generic function for requesting either children or parents of current model
+    function getRelatives(dataConfigArray, $modelObj, passedCallback){
+        var modelExtender = modella.extender,
+            tempConfig,
+            tempCallback,
+            tempRecord;
+
+        passedCallback = sanitizeCallback(passedCallback);
+
+        for(var index in dataConfigArray){
+
+            tempRecord = dataConfigArray[index];
+            tempCallback = buildDataAppenderCallback($modelObj, tempRecord.name, passedCallback);
+            tempConfig = tempRecord.baseConfig;
+
+            setInitialCondition(tempConfig, tempRecord, $modelObj);
+
+            modelExtender.init(tempConfig, tempCallback);
+
+        }
+    }
+
+    function initializeObject(config, object, callback){
+        config.initialObject = object;
+        modella.extender.init(config, callback);
+    }
+
+    //Handles immediate relative record initialization on existing objects
+    function initRelative($relativeObject, baseConfig){
+        var callback = function(finalObject){
+                $relativeObject = finalObject;
+            },
+            key;
+
+        if(typeof $relativeObject[0] !== 'undefined'){
+            for(key in $relativeObject){
+                callback = buildDataAppenderCallback($relativeObject, key);
+                initializeObject(baseConfig, $relativeObject[key], callback)
+            }
+        } else {
+            initializeObject(baseConfig, $relativeObject, callback);
+        }
+
+        delete baseConfig.initialObject;
+    }
+
+    function initRelativeObjects($model){
+        var relativesList = getRelativesList($model),
+            key,
+            needsInitialization,
+            baseConfig;
+
+        for(key in relativesList){
+            needsInitialization = checkRelativeNeedsInitialization($model[key]);
+
+            if(needsInitialization){
+                baseConfig = getBaseConfig($model, relativesList[key], key);
+                initRelative($model[key], baseConfig);
+            }
         }
     }
 
@@ -292,12 +354,13 @@
 
                 localCallback = function($passedModel, $error){
                     var finalModel = $passedModel;
-
                     if(finalModel && typeof finalModel[0] === 'undefined'){
                         finalModel = extendModel(config, finalModel);
+                        initRelativeObjects(finalModel);
                     } else if(finalModel){
                         for(var index in finalModel){
                             finalModel[index] = extendModel(config, finalModel[index]);
+                            initRelativeObjects(finalModel);
                         }
                     }
 

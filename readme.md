@@ -6,7 +6,14 @@ a simple ORM like Angular's resources or other network request service.  The bas
 RESTful post, get, put, delete calls, but some extended methods are included.  Speciallized CRUD calls can be configured
 upon object instantiation.
 
-For the (currently under development) documentation, please visit the [Modella wiki](https://github.com/cmstead/Modella/wiki).
+**Important Stuff To Know**
+
+- For the (currently under development) documentation, please visit the [Modella wiki](https://github.com/cmstead/Modella/wiki).
+- Modella is minified using Uglify. Most options which would interfere with older browsers have been turned off.
+- Modella is being released under the [Artistic License 2.0](http://opensource.org/licenses/Artistic-2.0).
+- Modella is released AS IS with no guarantee of suitability for any purpose whatsoever. (Please see license documentation)
+
+**Where The Project Stands**
 
 Modella.js is currently in development. Please refer to the list below regarding items that are complete and items
 that are still in development:

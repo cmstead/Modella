@@ -321,4 +321,5 @@ describe("Modella extended object", function(){
             expect(functionsExist).toBe(true);
         });
     });
+
 });

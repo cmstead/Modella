@@ -47,6 +47,7 @@ Modella extension object
 - [x] Model simple copy to get just the selected layer
 - [x] Recursive copy behavior
 - [x] Recursive revise behavior
+- [x] Recursive init with deep initial object
 
 Future release
 
@@ -59,6 +60,7 @@ Modella configuration object
 - [ ] Inheritable base configuration object
 - [ ] Configuration export/import for parent/child handling
 - [ ] Depth of model construction parameter and management
+- [ ] Extend modella.extender init function to lazy load next-level configurations
 
 Documentation
 =============
@@ -66,3 +68,9 @@ Documentation
 - [x] Core API documentation
 - [ ] Extension layer documentation
 - [ ] Configuration layer documentation
+
+Miscellaneous To Dos
+====================
+
+- [ ] Pull enclosed functions out of modella extender and into modella extensionUtilities object
+- [ ] Wrap all functions lifted out of modella extender in tests

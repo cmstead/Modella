@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="416bcc71-5d5b-4244-9454-3821424ed305" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Generated_files.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Generated_files.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/readme.md" afterPath="$PROJECT_DIR$/readme.md" />
     </list>
     <ignored path="Modella.iws" />
@@ -12,7 +11,7 @@
     <file path="/SpecRunner.html" changelist="416bcc71-5d5b-4244-9454-3821424ed305" time="1394571508141" ignored="false" />
     <file path="/modella_spec.js" changelist="416bcc71-5d5b-4244-9454-3821424ed305" time="1394085736665" ignored="false" />
     <file path="/a.dummy" changelist="416bcc71-5d5b-4244-9454-3821424ed305" time="1394586294001" ignored="false" />
-    <file path="/readme.md" changelist="416bcc71-5d5b-4244-9454-3821424ed305" time="1394991976491" ignored="false" />
+    <file path="/readme.md" changelist="416bcc71-5d5b-4244-9454-3821424ed305" time="1394995580291" ignored="false" />
     <file path="/modella.abstraction.js" changelist="416bcc71-5d5b-4244-9454-3821424ed305" time="1394571374491" ignored="false" />
     <file path="/modella.abstraction_spec.js" changelist="416bcc71-5d5b-4244-9454-3821424ed305" time="1394570026894" ignored="false" />
     <file path="/modella.extended.object_spec.js" changelist="416bcc71-5d5b-4244-9454-3821424ed305" time="1394672296818" ignored="false" />
@@ -40,7 +39,7 @@
       <file leaf-file-name="readme.md" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/readme.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="53" column="70" selection-start="2092" selection-end="2092" vertical-scroll-proportion="0.37437603">
+            <state line="68" column="4" selection-start="2488" selection-end="2488" vertical-scroll-proportion="0.74875206">
               <folding />
             </state>
           </provider>
@@ -463,7 +462,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/readme.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="53" column="70" selection-start="2092" selection-end="2092" vertical-scroll-proportion="0.37437603">
+        <state line="68" column="4" selection-start="2488" selection-end="2488" vertical-scroll-proportion="0.74875206">
           <folding />
         </state>
       </provider>

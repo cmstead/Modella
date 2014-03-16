@@ -66,7 +66,7 @@ Documentation
 =============
 
 - [x] Core API documentation
-- [ ] Extension layer documentation
+- [x] Extension layer documentation
 - [ ] Configuration layer documentation
 
 Miscellaneous To Dos

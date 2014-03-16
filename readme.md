@@ -51,7 +51,7 @@ Modella extension object
 
 Future release
 
-- [ ] Recursive saveAll
+- [ ] Recursive saveAll -- Depends on core feature: only save on dirty
 - [ ] Recursive deleteAll
 
 Modella configuration object

@@ -58,7 +58,7 @@ Modella configuration object
 Documentation
 =============
 
-- [ ] Core API documentation -- underway
+- [x] Core API documentation
 - [ ] Extension layer documentation
 - [ ] Configuration layer documentation
 

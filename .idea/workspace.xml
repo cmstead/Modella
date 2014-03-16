@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="416bcc71-5d5b-4244-9454-3821424ed305" name="Default" comment="">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/modella.extender.min.js" afterPath="$PROJECT_DIR$/minified-files/modella.extender.min.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/modella.min.js" afterPath="$PROJECT_DIR$/minified-files/modella.min.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/readme.md" afterPath="$PROJECT_DIR$/readme.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/watcherTasks.xml" afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Modella.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -15,7 +11,7 @@
     <file path="/SpecRunner.html" changelist="416bcc71-5d5b-4244-9454-3821424ed305" time="1394571508141" ignored="false" />
     <file path="/modella_spec.js" changelist="416bcc71-5d5b-4244-9454-3821424ed305" time="1394085736665" ignored="false" />
     <file path="/a.dummy" changelist="416bcc71-5d5b-4244-9454-3821424ed305" time="1394586294001" ignored="false" />
-    <file path="/readme.md" changelist="416bcc71-5d5b-4244-9454-3821424ed305" time="1394956138968" ignored="false" />
+    <file path="/readme.md" changelist="416bcc71-5d5b-4244-9454-3821424ed305" time="1394956250216" ignored="false" />
     <file path="/modella.abstraction.js" changelist="416bcc71-5d5b-4244-9454-3821424ed305" time="1394571374491" ignored="false" />
     <file path="/modella.abstraction_spec.js" changelist="416bcc71-5d5b-4244-9454-3821424ed305" time="1394570026894" ignored="false" />
     <file path="/modella.extended.object_spec.js" changelist="416bcc71-5d5b-4244-9454-3821424ed305" time="1394672296818" ignored="false" />
@@ -43,7 +39,7 @@
       <file leaf-file-name="readme.md" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/readme.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="28" selection-start="938" selection-end="938" vertical-scroll-proportion="0.37437603">
+            <state line="10" column="35" selection-start="471" selection-end="471" vertical-scroll-proportion="0.24958402">
               <folding />
             </state>
           </provider>
@@ -633,7 +629,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/readme.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="28" selection-start="938" selection-end="938" vertical-scroll-proportion="0.37437603">
+        <state line="10" column="35" selection-start="471" selection-end="471" vertical-scroll-proportion="0.24958402">
           <folding />
         </state>
       </provider>

@@ -8,7 +8,7 @@ upon object instantiation.
 
 **Important Stuff To Know**
 
-- For the (currently under development) documentation, please visit the [Modella wiki](https://github.com/cmstead/Modella/wiki).
+- Documentation is available at the [Modella wiki](https://github.com/cmstead/Modella/wiki).
 - Modella is minified using Uglify. Most options which would interfere with older browsers have been turned off.
 - Modella is being released under the [Artistic License 2.0](http://opensource.org/licenses/Artistic-2.0).
 - Modella is released AS IS with no guarantee of suitability for any purpose whatsoever. (Please see license documentation)

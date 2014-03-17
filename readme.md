@@ -74,3 +74,4 @@ Miscellaneous To Dos
 
 - [ ] Pull enclosed functions out of modella extender and into modella extensionUtilities object
 - [ ] Wrap all functions lifted out of modella extender in tests
+- [ ] Allow extended child configurations to define a foreign key the child uses to refer to the parent object

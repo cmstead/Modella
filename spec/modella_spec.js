@@ -108,14 +108,22 @@ describe('Modella', function(){
 
     describe('initById', function(){
 
+        var afterGetTester;
+
         beforeEach(function(){
+            afterGetTester = jasmine.createSpy('afterGet');
+
             $modella.modelConfig = {
                 service: {
                     get: function(id, callback){
                         callback({});
                     }
                 },
-                initialId: '1234abc'
+                initialId: '1234abc',
+                afterGet: function(dataObj){
+                    afterGetTester();
+                    return dataObj;
+                }
             };
         });
 
@@ -170,18 +178,31 @@ describe('Modella', function(){
             expect($modella.initByObject).toHaveBeenCalled();
         });
 
+        it('should call afterGet', function(){
+            $modella.initById('1234abc');
+
+            expect(afterGetTester).toHaveBeenCalled();
+        });
+
     });
 
     describe('initByIds', function(){
 
-        var idSet;
+        var idSet,
+            afterGetTester;
 
         beforeEach(function(){
+            afterGetTester = jasmine.createSpy('afterGet');
+
             $modella.modelConfig = {
                 service: {
                     get: function(id, callback){
                         callback({});
                     }
+                },
+                afterGet: function(dataObj){
+                    afterGetTester();
+                    return dataObj;
                 }
             };
 
@@ -242,11 +263,21 @@ describe('Modella', function(){
             expect(callTracker.calls.count()).toBe(3);
         });
 
+        it('should call afterGet three times', function(){
+            $modella.initByIds(idSet);
+
+            expect(afterGetTester.calls.count()).toBe(3);
+        });
+
     });
     
     describe('initByParentId', function(){
 
+        var afterGetTester;
+
         beforeEach(function(){
+            afterGetTester = jasmine.createSpy('afterGet');
+
             $modella.modelConfig.service = {
                 getByParentId: function(parentId, callback){
                     callback([
@@ -255,6 +286,11 @@ describe('Modella', function(){
                         {}
                     ]);
                 }
+            }
+
+            $modella.modelConfig.afterGet = function(dataObj){
+                afterGetTester();
+                return dataObj;
             }
         });
 
@@ -311,7 +347,11 @@ describe('Modella', function(){
             expect(returnedValue.length).toBe(3);
         });
 
+        it("should call afterGet 3 times", function(){
+            $modella.initByParentId('1234abc');
 
+            expect(afterGetTester.calls.count()).toBe(3);
+        });
 
     });
 
@@ -356,9 +396,34 @@ describe('Modella', function(){
             callback;
 
         beforeEach(function(){
+
+            $modella.modelConfig = {
+                service: {
+                    get: function(id, callback){
+                        callback({});
+                    },
+                    post: function(object, callback){
+                        callback({});
+                    },
+                    put: function(object, callback){
+                        callback({});
+                    },
+                    delete: function(object, callback){
+                        callback({});
+                    },
+                    getByParentId: function(id, callback){
+                        callback({});
+                    }
+                },
+                customFunctions: {
+                    testFxn1: function(){},
+                    testFxn2: function(){},
+                    testFxn3: "not a function"
+                }
+            };
             callback = function(model){
                 returnedValue = model;
-            }
+            };
         });
 
         it('should be a function', function(){
@@ -395,14 +460,29 @@ describe('Modella', function(){
             $modella.initModel({}, callback);
 
             expect(typeof returnedValue.createRecord).toBe('function');
-        })
+        });
 
         it('should return an object with a updateRecord function attached', function(){
             $modella.initModel({}, callback);
 
             expect(typeof returnedValue.updateRecord).toBe('function');
-        })
+        });
 
+        it('should append all custom functions to model', function(){
+            var hasCustomFunctions = true;
+            $modella.initModel({}, callback);
+
+            hasCustomFunctions = (typeof returnedValue.testFxn1 !== 'function') ? false : hasCustomFunctions;
+            hasCustomFunctions = (typeof returnedValue.testFxn2 !== 'function') ? false : hasCustomFunctions;
+
+            expect(hasCustomFunctions).toBe(true);
+        });
+
+        it('should not append items in custom functions that are not functions', function(){
+            $modella.initModel({}, callback);
+
+            expect(typeof returnedValue.testFxn3).toBe('undefined');
+        });
     });
 
 });

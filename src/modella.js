@@ -137,12 +137,7 @@
 
         //This handles the primary initialization
         init: function(callback){
-            var config = this.modelConfig,
-                passedCallback = sanitizeCallback(callback),
-
-                localCallback = function(dataObject, error){
-                    passedCallback(dataObject, error);
-                };
+            var localCallback = sanitizeCallback(callback);
 
             if(typeof this.modelConfig.initialObject !== 'undefined'){
                 this.initByObject(this.modelConfig.initialObject, localCallback);
@@ -153,7 +148,7 @@
             } else if(typeof this.modelConfig.initialIds !== 'undefined') {
                 this.initByIds(this.modelConfig.initialIds, localCallback);
             } else {
-                passedCallback(null, Error("Unable to initialize model."));
+                localCallback(null, Error("Unable to initialize model."));
             }
 
         },
@@ -180,9 +175,11 @@
         initById: function(id, callback){
             var $this = this,
                 passedCallback = sanitizeCallback(callback),
+                afterGet = sanitizeInterceptor(this.modelConfig.afterGet),
 
                 localCallback = function(dataObject, error){
                     if(dataObject !== null){
+                        dataObject = afterGet(dataObject);
                         $this.initByObject(dataObject, passedCallback);
                     } else {
                         passedCallback(null, error);
@@ -198,6 +195,7 @@
                 index = -1,
                 finalModelSet = [],
                 passedCallback = sanitizeCallback(callback),
+                afterGet = sanitizeInterceptor(this.modelConfig.afterGet),
 
                 pushModel = function(model){
                     finalModelSet.push(model);
@@ -206,6 +204,7 @@
                 localCallback = function(model, error){
 
                     if(model !== null){
+                        model = afterGet(model);
                         $this.initByObject(model, pushModel);
                     } else if(finalModelSet !== null) {
                         finalModelSet = null;
@@ -231,11 +230,13 @@
                 pushModel = function(model){
                     finalModelSet.push(model);
                 },
+                afterGet = sanitizeInterceptor(this.modelConfig.afterGet),
 
                 prepareModelSet = function(dataSet){
                     var index = -1;
 
                     while(typeof dataSet[++index] !== 'undefined'){
+                        dataSet[index] = afterGet(dataSet[index]);
                         $this.initByObject(dataSet[index], pushModel);
                     }
                 },
@@ -256,9 +257,17 @@
         initModel: function(modelObject, callback){
             var passedCallback = sanitizeCallback(callback);
 
+            this.modelConfig.customFunctions = (this.modelConfig.customFunctions) ? this.modelConfig.customFunctions : {};
+
             for(var key in modelBuilder){
                 if(modelBuilder.hasOwnProperty(key)){
                     modelObject[key] = modelBuilder[key](this.modelConfig);
+                }
+            }
+
+            for(var key in this.modelConfig.customFunctions){
+                if(typeof this.modelConfig.customFunctions[key] === 'function'){
+                    modelObject[key] = this.modelConfig.customFunctions[key];
                 }
             }
 

@@ -1,9 +1,12 @@
 describe('Modella returned object', function(){
     var $modella,
         dataService,
-        configAttributes;
+        configAttributes,
+        afterGetTester;
 
     beforeEach(function(){
+
+        afterGetTester = jasmine.createSpy('afterGet');
 
         dataService = {
             post: jasmine.createSpy("service.post"),
@@ -15,7 +18,11 @@ describe('Modella returned object', function(){
             beforeSave: jasmine.createSpy("beforeSave"),
             beforeCreate: jasmine.createSpy("beforeCreate"),
             beforeUpdate: jasmine.createSpy("beforeUpdate"),
-            beforeDelete: jasmine.createSpy("beforeDelete")
+            beforeDelete: jasmine.createSpy("beforeDelete"),
+            afterGet: function(dataObject){
+                afterGetTester();
+                return dataObject;
+            }
         };
 
         $modella = new modella();

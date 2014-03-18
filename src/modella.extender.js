@@ -155,7 +155,7 @@
                 object[key] = data;
             }
 
-            localCallback(data, error);
+            localCallback(object[key], error);
         }
 
         return callback;

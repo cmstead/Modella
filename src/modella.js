@@ -80,7 +80,7 @@
             },
 
             deleteRecord: function(modelConfig){
-                var deleteBehavior = modelConfig.service.delete,
+                var deleteBehavior = modelConfig.service.del,
                     interceptor = sanitizeInterceptor(modelConfig.beforeDelete);
 
                 return function(callback){

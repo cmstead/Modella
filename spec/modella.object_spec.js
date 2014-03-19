@@ -11,7 +11,7 @@ describe('Modella returned object', function(){
         dataService = {
             post: jasmine.createSpy("service.post"),
             put: jasmine.createSpy("service.put"),
-            delete: jasmine.createSpy("service.delete")
+            del: jasmine.createSpy("service.del")
         };
 
         configAttributes = {
@@ -115,10 +115,10 @@ describe('Modella returned object', function(){
             });
         });
 
-        it('should call service.delete', function(){
+        it('should call service.del', function(){
             $model.deleteRecord();
 
-            expect(dataService.delete).toHaveBeenCalled();
+            expect(dataService.del).toHaveBeenCalled();
         });
 
         it('should call beforeDelete', function(){

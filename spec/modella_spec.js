@@ -408,7 +408,7 @@ describe('Modella', function(){
                     put: function(object, callback){
                         callback({});
                     },
-                    delete: function(object, callback){
+                    del: function(object, callback){
                         callback({});
                     },
                     getByParentId: function(id, callback){

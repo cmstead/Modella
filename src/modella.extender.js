@@ -249,7 +249,6 @@
 
             if(needsInitialization){
                 baseConfig = getBaseConfig($model, relativesList[key], key);
-                console.log($model[key], baseConfig);
                 initRelative($model[key], baseConfig);
             }
         }

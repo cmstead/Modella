@@ -7,7 +7,7 @@ describe("Modella.extender", function(){
     beforeEach(function(){
         $modellaWrapper = modella.extender;
         $mockService = {
-            delete: jasmine.createSpy("service.delete"),
+            del: jasmine.createSpy("service.delete"),
             get: jasmine.createSpy("service.get"),
             post: jasmine.createSpy("service.post"),
             put: jasmine.createSpy("service.put")
@@ -53,7 +53,9 @@ describe("Modella.extender", function(){
                     service: $mockService,
                     children: [{
                         name: "child",
-                        service: Object.create($mockService)
+                        baseConfig: {
+                            service: Object.create($mockService)
+                        }
                     }]
                 };
 
@@ -68,7 +70,6 @@ describe("Modella.extender", function(){
             functionsExist = (typeof $model.child[0].createRecord !== "function") ? false : functionsExist;
             functionsExist = (typeof $model.child[0].updateRecord !== "function") ? false : functionsExist;
             functionsExist = (typeof $model.child[0].deleteRecord !== "function") ? false : functionsExist;
-            functionsExist = (typeof $model.child[0].copy !== "function") ? false : functionsExist;
             functionsExist = (typeof $model.child[0].revise !== "function") ? false : functionsExist;
 
             expect(functionsExist).toBe(true);
@@ -85,7 +86,9 @@ describe("Modella.extender", function(){
                     parents: [{
                         name: "parent",
                         foreignKey: "parent_id",
-                        service: Object.create($mockService)
+                        baseConfig: {
+                            service: Object.create($mockService)
+                        }
                     }]
                 };
 
@@ -100,7 +103,6 @@ describe("Modella.extender", function(){
             functionsExist = (typeof $model.parent.createRecord !== "function") ? false : functionsExist;
             functionsExist = (typeof $model.parent.updateRecord !== "function") ? false : functionsExist;
             functionsExist = (typeof $model.parent.deleteRecord !== "function") ? false : functionsExist;
-            functionsExist = (typeof $model.parent.copy !== "function") ? false : functionsExist;
             functionsExist = (typeof $model.parent.revise !== "function") ? false : functionsExist;
 
             expect(functionsExist).toBe(true);
@@ -123,11 +125,17 @@ describe("Modella.extender", function(){
                     parents: [{
                         name: "parent",
                         foreignKey: "parent_id",
-                        baseConfig: {}
+                        baseConfig: {
+                            service: $parentService,
+                            initialObject: {}
+                        }
                     }],
                     children: [{
                         name: "child",
-                        baseConfig: {}
+                        baseConfig: {
+                            service: $childService,
+                            initialObject: {}
+                        }
                     }],
                     service: $mockService,
                     initialObject: $initialObject
@@ -149,7 +157,10 @@ describe("Modella.extender", function(){
                 expect(JSON.stringify($returnedModel.parents)).toBe(JSON.stringify([{
                     name: "parent",
                     foreignKey: "parent_id",
-                    baseConfig: {}
+                    baseConfig: {
+                        service: $parentService,
+                        initialObject: {}
+                    }
                 }]));
             });
         });
@@ -162,7 +173,10 @@ describe("Modella.extender", function(){
             it("should match passed array", function(){
                 expect(JSON.stringify($returnedModel.children)).toBe(JSON.stringify([{
                     name: "child",
-                    baseConfig: {}
+                    baseConfig: {
+                        service: $childService,
+                        initialObject: {}
+                    }
                 }]));
             });
         });

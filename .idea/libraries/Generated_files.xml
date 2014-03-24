@@ -3,6 +3,7 @@
     <properties>
       <sourceFilesUrls>
         <item url="file://$PROJECT_DIR$/minified-files/modella.min.min.js" />
+        <item url="file://$PROJECT_DIR$/minified-files/modella.extender.min.min.js" />
       </sourceFilesUrls>
     </properties>
     <CLASSES>
@@ -11,8 +12,8 @@
       <root url="file://$PROJECT_DIR$/spec/modella.extended.object_spec.min.js" />
       <root url="file://$PROJECT_DIR$/src/modella.extender.min.js" />
       <root url="file://$PROJECT_DIR$/src/modella.extender.min.js" />
-      <root url="file://$PROJECT_DIR$/minified-files/modella.extender.min.min.js" />
       <root url="file://$PROJECT_DIR$/minified-files/modella.min.min.js" />
+      <root url="file://$PROJECT_DIR$/minified-files/modella.extender.min.min.js" />
     </CLASSES>
     <SOURCES />
   </library>

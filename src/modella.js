@@ -110,12 +110,6 @@
                         }
                     }
                 };
-            },
-
-            copy: function(){
-                return function(){
-                    return cleanModel(this);
-                };
             }
 
         },

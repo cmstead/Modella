@@ -168,7 +168,7 @@
 
         for(key in $model[configLocation]){
             if(name === $model[configLocation][key].name){
-                baseConfig = $model[configLocation][key];
+                baseConfig = $model[configLocation][key].baseConfig;
             }
         }
 
@@ -249,6 +249,7 @@
 
             if(needsInitialization){
                 baseConfig = getBaseConfig($model, relativesList[key], key);
+                console.log($model[key], baseConfig);
                 initRelative($model[key], baseConfig);
             }
         }
@@ -267,28 +268,6 @@
     extendedFunctions.getChildren = function(passedCallback){
         getRelatives(this.children, this, passedCallback);
     };
-
-    //An update to the copy function to remove all core and extended model properties
-    extendedFunctions.copy = function(){
-        var sanitizedModel = modella.utilities.cleanModel(this);
-
-        sanitizedModel = cleanProperties(sanitizedModel);
-        sanitizedModel = cleanRelatives(sanitizedModel, this, this.children);
-        sanitizedModel = cleanRelatives(sanitizedModel, this, this.parents);
-
-        return sanitizedModel;
-    };
-
-    //A function for copying a simple version of the model without relatives
-    extendedFunctions.simpleCopy = function(){
-        var sanitizedModel = modella.utilities.cleanModel(this);
-
-        sanitizedModel = cleanProperties(sanitizedModel);
-        sanitizedModel = stripRelatives(sanitizedModel, this.children);
-        sanitizedModel = stripRelatives(sanitizedModel, this.parents);
-
-        return sanitizedModel;
-    }
 
     //An update to the revise function to update values based on passed object
     extendedFunctions.revise = function(updateObj){

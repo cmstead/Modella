@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="416bcc71-5d5b-4244-9454-3821424ed305" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/modella.extender.js" afterPath="$PROJECT_DIR$/src/modella.extender.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/minified-files/modella.extender.min.js" afterPath="$PROJECT_DIR$/minified-files/modella.extender.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/modella.js" afterPath="$PROJECT_DIR$/src/modella.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/minified-files/modella.min.js" afterPath="$PROJECT_DIR$/minified-files/modella.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modella.full.js" afterPath="$PROJECT_DIR$/modella.full.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modella.full.min.js" afterPath="$PROJECT_DIR$/modella.full.min.js" />
     </list>
     <ignored path="Modella.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -70,10 +67,10 @@
         <option value="$PROJECT_DIR$/spec/modella.object_spec.js" />
         <option value="$PROJECT_DIR$/spec/modella.extender_spec.js" />
         <option value="$PROJECT_DIR$/spec/modella.extended.object_spec.js" />
-        <option value="$PROJECT_DIR$/modella.full.js" />
-        <option value="$PROJECT_DIR$/modella.full.min.js" />
         <option value="$PROJECT_DIR$/src/modella.js" />
         <option value="$PROJECT_DIR$/src/modella.extender.js" />
+        <option value="$PROJECT_DIR$/modella.full.js" />
+        <option value="$PROJECT_DIR$/modella.full.min.js" />
       </list>
     </option>
   </component>
@@ -142,6 +139,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Modella" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Modella" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="minified-files" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -441,37 +452,37 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/modella.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="36" column="0" selection-start="0" selection-end="10555" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#228#373#0" expanded="false" />
+            <element signature="e#2460#3235#0" expanded="false" />
+            <element signature="e#3285#4057#0" expanded="false" />
+            <element signature="e#3472#4042#0" expanded="false" />
+            <element signature="e#4090#4457#0" expanded="false" />
+            <element signature="e#4134#4442#0" expanded="false" />
+            <element signature="e#4176#4424#0" expanded="false" />
+            <element signature="e#4265#4402#0" expanded="false" />
+            <element signature="e#4949#5752#0" expanded="false" />
+            <element signature="e#5763#6026#0" expanded="false" />
+            <element signature="e#6499#7099#0" expanded="false" />
+            <element signature="e#8604#8670#0" expanded="false" />
+            <element signature="e#10409#10541#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/modella.full.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="583" column="11" selection-start="19691" selection-end="19691" vertical-scroll-proportion="0.6234257">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/minified-files/modella.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="31" selection-start="31" selection-end="31" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/minified-files/modella.extender.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="46" selection-start="46" selection-end="46" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modella.full.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="4945" selection-start="10415" selection-end="10415" vertical-scroll-proportion="0.019206146">
+        <state line="637" column="11" selection-start="20982" selection-end="20982" vertical-scroll-proportion="0.9622166">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/modella.extender.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="238" column="21" selection-start="7130" selection-end="7130" vertical-scroll-proportion="0.5050378">
+        <state line="238" column="21" selection-start="0" selection-end="10414" vertical-scroll-proportion="0.5050378">
           <folding>
             <element signature="e#295#335#0" expanded="false" />
             <element signature="e#666#765#0" expanded="false" />
@@ -506,24 +517,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/modella.js">
+    <entry file="file://$PROJECT_DIR$/minified-files/modella.min.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="0" selection-start="1110" selection-end="1110" vertical-scroll-proportion="0.3438287">
-          <folding>
-            <element signature="e#228#373#0" expanded="false" />
-            <element signature="e#2460#3235#0" expanded="false" />
-            <element signature="e#3285#4057#0" expanded="false" />
-            <element signature="e#3472#4042#0" expanded="false" />
-            <element signature="e#4090#4457#0" expanded="false" />
-            <element signature="e#4134#4442#0" expanded="false" />
-            <element signature="e#4176#4424#0" expanded="false" />
-            <element signature="e#4265#4402#0" expanded="false" />
-            <element signature="e#4949#5752#0" expanded="false" />
-            <element signature="e#5763#6026#0" expanded="false" />
-            <element signature="e#6499#7099#0" expanded="false" />
-            <element signature="e#8604#8670#0" expanded="false" />
-            <element signature="e#10409#10541#0" expanded="false" />
-          </folding>
+        <state line="0" column="27" selection-start="27" selection-end="27" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/minified-files/modella.extender.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="5" selection-start="5" selection-end="5" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modella.full.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="5661" selection-start="11161" selection-end="11161" vertical-scroll-proportion="0.019206146">
+          <folding />
         </state>
       </provider>
     </entry>

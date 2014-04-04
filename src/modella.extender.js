@@ -1,3 +1,5 @@
+/*global modella*/
+
 (function($window){
     'use strict';
 
@@ -14,17 +16,18 @@
     //Compile an object with parent/child name values as keys for testing
     function getRelativesList(model){
         var key,
-            relativesList = {};
+            relativesList = {},
+            index;
 
         model.parents = (model.parents) ? model.parents : [];
         model.children = (model.children) ? model.children : [];
 
-        for(var index in model.parents){
+        for(index in model.parents){
             key = model.parents[index].name;
             relativesList[key] = 'parent';
         }
 
-        for(var index in model.children){
+        for(index in model.children){
             key = model.children[index].name;
             relativesList[key] = 'child';
         }
@@ -168,7 +171,7 @@
         if(typeof $relativeObject[0] !== 'undefined'){
             for(key in $relativeObject){
                 callback = buildDataAppenderCallback($relativeObject, key);
-                initializeObject(baseConfig, $relativeObject[key], callback)
+                initializeObject(baseConfig, $relativeObject[key], callback);
             }
         } else {
             initializeObject(baseConfig, $relativeObject, callback);
@@ -205,6 +208,8 @@
                 safeModel[key] = model[key];
             }
         }
+
+        return safeModel;
     }
 
     //Remove relatives from model
@@ -212,7 +217,8 @@
         var safeModel = createSafeModel(model);
 
         for(var key in model[relativeType]){
-            delete safeModel[key];
+            var relativeKey = model[relativeType][key].name;
+            delete safeModel[relativeKey];
         }
 
         return safeModel;
@@ -222,19 +228,20 @@
     function extendCopy(model){
         var originalCopy = model.copy;
 
-        function newCopy($model){
+        model.copy = function ($model){
             var amendedModel;
+
+            $model = ($model) ? $model : this;
 
             amendedModel = cleanRelatives($model, 'parents');
             amendedModel = cleanRelatives(amendedModel, 'children');
 
             delete amendedModel.parents;
             delete amendedModel.children;
+            delete amendedModel.baseConfig;
 
             originalCopy(amendedModel);
-        }
-
-        model.copy = newCopy;
+        };
 
         return model;
     }
@@ -264,7 +271,7 @@
                 updateRelative(this[key], updateObj[key]);
             }
         }
-    }
+    };
 
     /*
     * Functions to extend the base model

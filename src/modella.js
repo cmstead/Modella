@@ -33,7 +33,7 @@
             copy: function(){
                 return function(model){
                     return cleanModel(model);
-                }
+                };
             },
 
             saveRecord: function(){
@@ -60,7 +60,7 @@
                         localCallback = function(id, error){
                             if(id !== null){
                                 $this.id = id;
-                                passedCallback(model);
+                                passedCallback($model);
                             } else {
                                 passedCallback(null, error);
                             }
@@ -82,7 +82,7 @@
 
                         localCallback = function(data, error){
                             if(data !== null){
-                                sanitizedCallback(model);
+                                sanitizedCallback($model);
                             } else {
                                 sanitizedCallback(null, error);
                             }
@@ -104,7 +104,7 @@
 
                         localCallback = function(data, error){
                             if(data !== null){
-                                passedCallback(model);
+                                passedCallback($model);
                             } else {
                                 passedCallback(null, error);
                             }
@@ -251,7 +251,7 @@
 
                 localCallback = function(modelSet, error){
                     if(modelSet !== null){
-                        prepareModelSet(modelSet)
+                        prepareModelSet(modelSet);
                         passedCallback(finalModelSet);
                     } else {
                         passedCallback(null, error);
@@ -263,17 +263,18 @@
 
         //This takes in a finalized data object and applies model functions to it
         initModel: function(modelObject, callback){
-            var passedCallback = sanitizeCallback(callback);
+            var passedCallback = sanitizeCallback(callback),
+                key;
 
             this.modelConfig.customFunctions = (this.modelConfig.customFunctions) ? this.modelConfig.customFunctions : {};
 
-            for(var key in modelBuilder){
+            for(key in modelBuilder){
                 if(modelBuilder.hasOwnProperty(key)){
                     modelObject[key] = modelBuilder[key](this.modelConfig);
                 }
             }
 
-            for(var key in this.modelConfig.customFunctions){
+            for(key in this.modelConfig.customFunctions){
                 if(typeof this.modelConfig.customFunctions[key] === 'function'){
                     modelObject[key] = this.modelConfig.customFunctions[key];
                 }

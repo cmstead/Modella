@@ -1,3 +1,4 @@
+/*global modella*/
 (function($window){
     'use strict';
 
@@ -33,7 +34,7 @@
             copy: function(){
                 return function(model){
                     return cleanModel(model);
-                }
+                };
             },
 
             saveRecord: function(){
@@ -60,7 +61,7 @@
                         localCallback = function(id, error){
                             if(id !== null){
                                 $this.id = id;
-                                passedCallback(model);
+                                passedCallback($model);
                             } else {
                                 passedCallback(null, error);
                             }
@@ -82,7 +83,7 @@
 
                         localCallback = function(data, error){
                             if(data !== null){
-                                sanitizedCallback(model);
+                                sanitizedCallback($model);
                             } else {
                                 sanitizedCallback(null, error);
                             }
@@ -104,7 +105,7 @@
 
                         localCallback = function(data, error){
                             if(data !== null){
-                                passedCallback(model);
+                                passedCallback($model);
                             } else {
                                 passedCallback(null, error);
                             }
@@ -251,7 +252,7 @@
 
                 localCallback = function(modelSet, error){
                     if(modelSet !== null){
-                        prepareModelSet(modelSet)
+                        prepareModelSet(modelSet);
                         passedCallback(finalModelSet);
                     } else {
                         passedCallback(null, error);
@@ -263,17 +264,18 @@
 
         //This takes in a finalized data object and applies model functions to it
         initModel: function(modelObject, callback){
-            var passedCallback = sanitizeCallback(callback);
+            var passedCallback = sanitizeCallback(callback),
+                key;
 
             this.modelConfig.customFunctions = (this.modelConfig.customFunctions) ? this.modelConfig.customFunctions : {};
 
-            for(var key in modelBuilder){
+            for(key in modelBuilder){
                 if(modelBuilder.hasOwnProperty(key)){
                     modelObject[key] = modelBuilder[key](this.modelConfig);
                 }
             }
 
-            for(var key in this.modelConfig.customFunctions){
+            for(key in this.modelConfig.customFunctions){
                 if(typeof this.modelConfig.customFunctions[key] === 'function'){
                     modelObject[key] = this.modelConfig.customFunctions[key];
                 }
@@ -310,17 +312,18 @@
     //Compile an object with parent/child name values as keys for testing
     function getRelativesList(model){
         var key,
-            relativesList = {};
+            relativesList = {},
+            index;
 
         model.parents = (model.parents) ? model.parents : [];
         model.children = (model.children) ? model.children : [];
 
-        for(var index in model.parents){
+        for(index in model.parents){
             key = model.parents[index].name;
             relativesList[key] = 'parent';
         }
 
-        for(var index in model.children){
+        for(index in model.children){
             key = model.children[index].name;
             relativesList[key] = 'child';
         }
@@ -464,7 +467,7 @@
         if(typeof $relativeObject[0] !== 'undefined'){
             for(key in $relativeObject){
                 callback = buildDataAppenderCallback($relativeObject, key);
-                initializeObject(baseConfig, $relativeObject[key], callback)
+                initializeObject(baseConfig, $relativeObject[key], callback);
             }
         } else {
             initializeObject(baseConfig, $relativeObject, callback);
@@ -501,6 +504,8 @@
                 safeModel[key] = model[key];
             }
         }
+
+        return safeModel;
     }
 
     //Remove relatives from model
@@ -508,7 +513,8 @@
         var safeModel = createSafeModel(model);
 
         for(var key in model[relativeType]){
-            delete safeModel[key];
+            var relativeKey = model[relativeType][key].name;
+            delete safeModel[relativeKey];
         }
 
         return safeModel;
@@ -518,19 +524,20 @@
     function extendCopy(model){
         var originalCopy = model.copy;
 
-        function newCopy($model){
+        model.copy = function ($model){
             var amendedModel;
+
+            $model = ($model) ? $model : this;
 
             amendedModel = cleanRelatives($model, 'parents');
             amendedModel = cleanRelatives(amendedModel, 'children');
 
             delete amendedModel.parents;
             delete amendedModel.children;
+            delete amendedModel.baseConfig;
 
             originalCopy(amendedModel);
-        }
-
-        model.copy = newCopy;
+        };
 
         return model;
     }
@@ -560,7 +567,7 @@
                 updateRelative(this[key], updateObj[key]);
             }
         }
-    }
+    };
 
     /*
      * Functions to extend the base model

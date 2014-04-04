@@ -16,7 +16,7 @@
                 sanitizedModel = {};
 
             for(var key in model){
-                if(key !== 'baseConfig' && model.hasOwnProperty(key) && typeof model[key] !== 'function'){
+                if(model.hasOwnProperty(key) && typeof model[key] !== 'function'){
                     sanitizedModel[key] = model[key];
                 }
             }
@@ -29,6 +29,12 @@
 
         //The methods on this object are meta-functions for producing model behaviors
         modelBuilder = {
+
+            copy: function(){
+                return function(model){
+                    return cleanModel(model);
+                }
+            },
 
             saveRecord: function(){
                 return function(callback){
@@ -49,7 +55,7 @@
                 return function(callback){
                     var $this = this,
                         passedCallback = sanitizeCallback(callback),
-                        $model = cleanModel(this),
+                        $model = this.copy(this),
 
                         localCallback = function(id, error){
                             if(id !== null){
@@ -71,15 +77,14 @@
                     interceptor = sanitizeInterceptor(modelConfig.beforeUpdate);
 
                 return function(callback){
-                    var $this = this,
-                        $model = cleanModel(this),
-                        passedCallback = sanitizeCallback(callback),
+                    var $model = this.copy(this),
+                        sanitizedCallback = sanitizeCallback(callback),
 
                         localCallback = function(data, error){
                             if(data !== null){
-                                passedCallback(model);
+                                sanitizedCallback(model);
                             } else {
-                                passedCallback(null, error);
+                                sanitizedCallback(null, error);
                             }
                         };
 
@@ -94,8 +99,7 @@
                     interceptor = sanitizeInterceptor(modelConfig.beforeDelete);
 
                 return function(callback){
-                    var $this = this,
-                        $model = cleanModel(this),
+                    var $model = this.copy(this),
                         passedCallback = sanitizeCallback(callback),
 
                         localCallback = function(data, error){

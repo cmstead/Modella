@@ -13,8 +13,8 @@ upon object instantiation.
 - Modella is being released under the [Artistic License 2.0](http://opensource.org/licenses/Artistic-2.0).
 - Modella is released AS IS with no guarantee of suitability for any purpose whatsoever. (Please see license documentation)
 
-Where The Project Stands (AKA Wishlist and Chores)
-==================================================
+Wishlist and Chores
+===================
 
 **Modella core**
 

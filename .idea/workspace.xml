@@ -2,22 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="416bcc71-5d5b-4244-9454-3821424ed305" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/modella.extender.js" afterPath="$PROJECT_DIR$/src/modella.extender.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/minified-files/modella.extender.min.js" afterPath="$PROJECT_DIR$/minified-files/modella.extender.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modella.full.js" afterPath="$PROJECT_DIR$/modella.full.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modella.full.min.js" afterPath="$PROJECT_DIR$/modella.full.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/modella.js" afterPath="$PROJECT_DIR$/src/modella.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/minified-files/modella.min.js" afterPath="$PROJECT_DIR$/minified-files/modella.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/readme.md" afterPath="$PROJECT_DIR$/readme.md" />
     </list>
     <ignored path="Modella.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="416bcc71-5d5b-4244-9454-3821424ed305" time="1396633475156" ignored="false" />
+    <file path="/Dummy.txt" changelist="416bcc71-5d5b-4244-9454-3821424ed305" time="1396648589738" ignored="false" />
     <file path="/modella.js" changelist="416bcc71-5d5b-4244-9454-3821424ed305" time="1396646718075" ignored="false" />
     <file path="/SpecRunner.html" changelist="416bcc71-5d5b-4244-9454-3821424ed305" time="1394571508141" ignored="false" />
     <file path="/modella_spec.js" changelist="416bcc71-5d5b-4244-9454-3821424ed305" time="1395174770006" ignored="false" />
     <file path="/a.dummy" changelist="416bcc71-5d5b-4244-9454-3821424ed305" time="1396647683367" ignored="false" />
-    <file path="/readme.md" changelist="416bcc71-5d5b-4244-9454-3821424ed305" time="1395076116207" ignored="false" />
+    <file path="/readme.md" changelist="416bcc71-5d5b-4244-9454-3821424ed305" time="1396648723110" ignored="false" />
     <file path="/modella.abstraction.js" changelist="416bcc71-5d5b-4244-9454-3821424ed305" time="1394571374491" ignored="false" />
     <file path="/modella.abstraction_spec.js" changelist="416bcc71-5d5b-4244-9454-3821424ed305" time="1394570026894" ignored="false" />
     <file path="/modella.extended.object_spec.js" changelist="416bcc71-5d5b-4244-9454-3821424ed305" time="1396589874626" ignored="false" />
@@ -43,7 +37,17 @@
     <favorites_list name="Modella" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="readme.md" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/readme.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="65" column="10" selection-start="2421" selection-end="2421" vertical-scroll-proportion="1.8571428">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -66,7 +70,6 @@
         <option value="$PROJECT_DIR$/spec/modella.abstraction_spec.js" />
         <option value="$PROJECT_DIR$/src/modella.abstraction.js" />
         <option value="$PROJECT_DIR$/spec/MinSpecRunner.html" />
-        <option value="$PROJECT_DIR$/readme.md" />
         <option value="$PROJECT_DIR$/spec/SpecRunner.html" />
         <option value="$PROJECT_DIR$/spec/modella_spec.js" />
         <option value="$PROJECT_DIR$/spec/modella.object_spec.js" />
@@ -76,6 +79,7 @@
         <option value="$PROJECT_DIR$/src/modella.extender.js" />
         <option value="$PROJECT_DIR$/modella.full.js" />
         <option value="$PROJECT_DIR$/modella.full.min.js" />
+        <option value="$PROJECT_DIR$/readme.md" />
       </list>
     </option>
   </component>
@@ -114,7 +118,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -163,6 +166,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -171,8 +175,8 @@
     <property name="options.lastSelected" value="Settings.JavaScript.Linters.JSHint" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src" />
     <property name="FullScreen" value="false" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -210,21 +214,21 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="122" y="22" width="1660" height="940" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16058394" sideWeight="0.49969456" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22785583" sideWeight="0.8394161" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22785583" sideWeight="0.6727494" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.16058394" sideWeight="0.5003054" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3272506" sideWeight="0.49969456" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3272506" sideWeight="0.49969456" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16058394" sideWeight="0.49969456" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -313,13 +317,6 @@
         <state line="26" column="0" selection-start="1004" selection-end="1004" vertical-scroll-proportion="0.6759099" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/readme.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="75" column="64" selection-start="2765" selection-end="2765" vertical-scroll-proportion="0.6672213">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/spec/SpecRunner.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="20" column="83" selection-start="1026" selection-end="1026" vertical-scroll-proportion="0.407279" />
@@ -327,211 +324,57 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/spec/modella_spec.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="455" column="40" selection-start="13518" selection-end="13518" vertical-scroll-proportion="0.33211678">
-          <folding />
-        </state>
+        <state line="455" column="40" selection-start="13518" selection-end="13518" vertical-scroll-proportion="0.33211678" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/spec/modella.object_spec.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="217" column="0" selection-start="5627" selection-end="5627" vertical-scroll-proportion="0.6978558">
-          <folding>
-            <element signature="e#724#808#0" expanded="false" />
-            <element signature="e#910#1688#0" expanded="false" />
-            <element signature="e#990#1352#0" expanded="false" />
-            <element signature="e#1022#1170#0" expanded="false" />
-            <element signature="e#1293#1340#0" expanded="false" />
-            <element signature="e#1405#1509#0" expanded="false" />
-            <element signature="e#1562#1679#0" expanded="false" />
-            <element signature="e#1737#2514#0" expanded="false" />
-            <element signature="e#1817#2179#0" expanded="false" />
-            <element signature="e#1849#1997#0" expanded="false" />
-            <element signature="e#2120#2167#0" expanded="false" />
-            <element signature="e#2231#2334#0" expanded="false" />
-            <element signature="e#2387#2504#0" expanded="false" />
-            <element signature="e#2563#3340#0" expanded="false" />
-            <element signature="e#2946#2993#0" expanded="false" />
-            <element signature="e#3387#4293#0" expanded="false" />
-            <element signature="e#3467#3907#0" expanded="false" />
-            <element signature="e#3499#3586#0" expanded="false" />
-            <element signature="e#3709#3756#0" expanded="false" />
-            <element signature="e#3976#4081#0" expanded="false" />
-            <element signature="e#4147#4284#0" expanded="false" />
-            <element signature="e#4336#5624#0" expanded="false" />
-            <element signature="e#4416#4838#0" expanded="false" />
-            <element signature="e#4448#4662#0" expanded="false" />
-            <element signature="e#4481#4610#0" expanded="false" />
-            <element signature="e#4778#4825#0" expanded="false" />
-            <element signature="e#4887#4957#0" expanded="false" />
-            <element signature="e#5042#5384#0" expanded="false" />
-            <element signature="e#5075#5179#0" expanded="false" />
-            <element signature="e#5450#5615#0" expanded="false" />
-          </folding>
-        </state>
+        <state line="217" column="0" selection-start="5627" selection-end="5627" vertical-scroll-proportion="0.6978558" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/spec/modella.extender_spec.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="15" selection-start="225" selection-end="225" vertical-scroll-proportion="0.018891688">
-          <folding>
-            <element signature="e#454#520#0" expanded="false" />
-            <element signature="e#571#633#0" expanded="false" />
-            <element signature="e#668#3838#0" expanded="false" />
-            <element signature="e#716#793#0" expanded="false" />
-            <element signature="e#852#1266#0" expanded="false" />
-            <element signature="e#934#1003#0" expanded="false" />
-            <element signature="e#1030#1142#0" expanded="false" />
-            <element signature="e#1330#2527#0" expanded="false" />
-            <element signature="e#1442#1502#0" expanded="false" />
-            <element signature="e#1529#1815#0" expanded="false" />
-            <element signature="e#1604#1797#0" expanded="false" />
-            <element signature="e#1605#1796#0" expanded="false" />
-            <element signature="e#1682#1774#0" expanded="false" />
-            <element signature="e#1910#1988#0" expanded="false" />
-            <element signature="e#1911#1987#0" expanded="false" />
-            <element signature="e#2704#2764#0" expanded="false" />
-            <element signature="e#2791#3126#0" expanded="false" />
-            <element signature="e#2865#3108#0" expanded="false" />
-            <element signature="e#2866#3107#0" expanded="false" />
-            <element signature="e#2993#3085#0" expanded="false" />
-            <element signature="e#3222#3298#0" expanded="false" />
-            <element signature="e#3884#6221#0" expanded="false" />
-            <element signature="e#4000#5018#0" expanded="false" />
-            <element signature="e#4149#4827#0" expanded="false" />
-            <element signature="e#4180#4457#0" expanded="false" />
-            <element signature="e#4181#4456#0" expanded="false" />
-            <element signature="e#4308#4434#0" expanded="false" />
-            <element signature="e#4489#4715#0" expanded="false" />
-            <element signature="e#4490#4714#0" expanded="false" />
-            <element signature="e#4567#4692#0" expanded="false" />
-            <element signature="e#4878#4948#0" expanded="false" />
-            <element signature="e#5060#5637#0" expanded="false" />
-            <element signature="e#5131#5216#0" expanded="false" />
-            <element signature="e#5274#5625#0" expanded="false" />
-            <element signature="e#5359#5608#0" expanded="false" />
-            <element signature="e#5360#5607#0" expanded="false" />
-            <element signature="e#5475#5589#0" expanded="false" />
-            <element signature="e#5680#6212#0" expanded="false" />
-            <element signature="e#5751#5837#0" expanded="false" />
-            <element signature="e#5895#6200#0" expanded="false" />
-            <element signature="e#5981#6183#0" expanded="false" />
-            <element signature="e#5982#6182#0" expanded="false" />
-            <element signature="e#6051#6164#0" expanded="false" />
-          </folding>
-        </state>
+        <state line="9" column="15" selection-start="225" selection-end="225" vertical-scroll-proportion="0.018891688" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/spec/modella.extended.object_spec.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="0" selection-start="1225" selection-end="1225" vertical-scroll-proportion="0.4880597">
-          <folding>
-            <element signature="e#537#615#0" expanded="false" />
-            <element signature="e#641#1124#0" expanded="false" />
-            <element signature="e#664#859#0" expanded="false" />
-            <element signature="e#665#858#0" expanded="false" />
-            <element signature="e#768#844#0" expanded="false" />
-            <element signature="e#883#1036#0" expanded="false" />
-            <element signature="e#884#1035#0" expanded="false" />
-            <element signature="e#945#1021#0" expanded="false" />
-            <element signature="e#1175#1222#0" expanded="false" />
-            <element signature="e#1373#1447#0" expanded="false" />
-            <element signature="e#1517#1649#0" expanded="false" />
-            <element signature="e#1726#2409#0" expanded="false" />
-            <element signature="e#1852#1897#0" expanded="false" />
-            <element signature="e#2460#3587#0" expanded="false" />
-            <element signature="e#2508#2583#0" expanded="false" />
-            <element signature="e#2652#2796#0" expanded="false" />
-            <element signature="e#2873#3578#0" expanded="false" />
-            <element signature="e#3010#3057#0" expanded="false" />
-            <element signature="e#3624#7390#0" expanded="false" />
-            <element signature="e#3680#3922#0" expanded="false" />
-            <element signature="e#3982#4473#0" expanded="false" />
-            <element signature="e#4105#4177#0" expanded="false" />
-            <element signature="e#4554#5673#0" expanded="false" />
-            <element signature="e#4712#4784#0" expanded="false" />
-            <element signature="e#5734#6209#0" expanded="false" />
-            <element signature="e#5846#5916#0" expanded="false" />
-            <element signature="e#6291#7382#0" expanded="false" />
-            <element signature="e#6438#6508#0" expanded="false" />
-          </folding>
-        </state>
+        <state line="43" column="0" selection-start="1225" selection-end="1225" vertical-scroll-proportion="0.4880597" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/modella.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="85" selection-start="0" selection-end="10573" vertical-scroll-proportion="0.028571429">
-          <folding>
-            <element signature="e#228#373#0" expanded="false" />
-            <element signature="e#4094#4461#0" expanded="false" />
-            <element signature="e#4138#4446#0" expanded="false" />
-            <element signature="e#4180#4428#0" expanded="false" />
-            <element signature="e#4269#4406#0" expanded="false" />
-            <element signature="e#4953#5756#0" expanded="false" />
-            <element signature="e#5767#6030#0" expanded="false" />
-            <element signature="e#6503#7103#0" expanded="false" />
-            <element signature="e#8608#8674#0" expanded="false" />
-            <element signature="e#10427#10559#0" expanded="false" />
-          </folding>
-        </state>
+        <state line="29" column="85" selection-start="0" selection-end="10573" vertical-scroll-proportion="0.028571429" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/modella.full.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="301" column="75" selection-start="10709" selection-end="10709" vertical-scroll-proportion="0.8534743">
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
+        <state line="301" column="75" selection-start="10709" selection-end="10709" vertical-scroll-proportion="0.8534743" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/modella.extender.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="313" column="0" selection-start="9447" selection-end="9447" vertical-scroll-proportion="0.49848944">
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#1072#1349#0" expanded="false" />
-            <element signature="e#1145#1311#0" expanded="false" />
-            <element signature="e#1212#1301#0" expanded="false" />
-            <element signature="e#1464#1897#0" expanded="false" />
-            <element signature="e#1601#1891#0" expanded="false" />
-            <element signature="e#1641#1682#0" expanded="false" />
-            <element signature="e#1808#1881#0" expanded="false" />
-            <element signature="e#1989#2190#0" expanded="false" />
-            <element signature="e#2064#2127#0" expanded="false" />
-            <element signature="e#2133#2184#0" expanded="false" />
-            <element signature="e#2196#2598#0" expanded="false" />
-            <element signature="e#2740#3015#0" expanded="false" />
-            <element signature="e#3069#3423#0" expanded="false" />
-            <element signature="e#3549#3743#0" expanded="false" />
-            <element signature="e#3843#4075#0" expanded="false" />
-            <element signature="e#4228#4794#0" expanded="false" />
-            <element signature="e#5123#5185#0" expanded="false" />
-            <element signature="e#5654#6100#0" expanded="false" />
-            <element signature="e#7547#7612#0" expanded="false" />
-            <element signature="e#7742#7808#0" expanded="false" />
-            <element signature="e#8505#8712#0" expanded="false" />
-            <element signature="e#8850#9147#0" expanded="false" />
-          </folding>
-        </state>
+        <state line="313" column="0" selection-start="9447" selection-end="9447" vertical-scroll-proportion="0.49848944" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/minified-files/modella.min.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="23" selection-start="23" selection-end="23" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="0" column="23" selection-start="23" selection-end="23" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/minified-files/modella.extender.min.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="65" selection-start="0" selection-end="5771" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="0" column="65" selection-start="0" selection-end="5771" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/modella.full.min.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="5771" selection-start="11270" selection-end="11270" vertical-scroll-proportion="0.023112481">
+        <state line="1" column="5771" selection-start="11270" selection-end="11270" vertical-scroll-proportion="0.023112481" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/readme.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="65" column="10" selection-start="2421" selection-end="2421" vertical-scroll-proportion="1.8571428">
           <folding />
         </state>
       </provider>

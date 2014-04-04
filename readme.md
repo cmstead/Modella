@@ -1,9 +1,9 @@
 Modella.js
 ==========
 
-Modella.js is an ORM-like data modelling object for JavaScript which is meant to act as an abstraction layer between
+Modella.js is a data modelling object for JavaScript which is meant to act as an abstraction layer between
 a simple ORM like Angular's resources or other network request service.  The basic CRUD behaviors default to standard
-RESTful post, get, put, delete calls, but some extended methods are included.  Speciallized CRUD calls can be configured
+RESTful post, get, put, delete calls, but some extended methods are included.  Specialized CRUD calls can be configured
 upon object instantiation.
 
 **Important Stuff To Know**
@@ -13,13 +13,10 @@ upon object instantiation.
 - Modella is being released under the [Artistic License 2.0](http://opensource.org/licenses/Artistic-2.0).
 - Modella is released AS IS with no guarantee of suitability for any purpose whatsoever. (Please see license documentation)
 
-**Where The Project Stands**
+Where The Project Stands (AKA Wishlist and Chores)
+==================================================
 
-Modella.js is currently in development. Please refer to the list below regarding items that are complete and items
-that are still in development:
-
-Modella core
-============
+**Modella core**
 
 - [x] Basic object instantiation
 - [x] Model initialization with a pre-built object
@@ -37,15 +34,13 @@ Future release
 
 - [ ] Save only on dirty
 
-Modella extension object
-========================
+**Modella extension object**
 
 - [x] Model instantiation abstraction layer
 - [x] Parent-child relationship configuration
 - [x] Get parents function
 - [x] Get children function
 - [x] Model simple copy to get just the selected layer
-- [x] Recursive copy behavior
 - [x] Recursive revise behavior
 - [x] Recursive init with deep initial object
 
@@ -53,24 +48,22 @@ Future release
 
 - [ ] Recursive saveAll -- Depends on core feature: only save on dirty
 - [ ] Recursive deleteAll
+- [ ] Recursive copy behavior
 
-Modella configuration object
-============================
+**Modella configuration object**
 
 - [ ] Inheritable base configuration object
 - [ ] Configuration export/import for parent/child handling
 - [ ] Depth of model construction parameter and management
 - [ ] Extend modella.extender init function to lazy load next-level configurations
 
-Documentation
-=============
+**Documentation**
 
 - [x] Core API documentation
 - [x] Extension layer documentation
 - [ ] Configuration layer documentation
 
-Miscellaneous To Dos
-====================
+**Chores**
 
 - [ ] Pull enclosed functions out of modella extender and into modella extensionUtilities object
 - [ ] Wrap all functions lifted out of modella extender in tests

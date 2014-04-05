@@ -7,47 +7,14 @@
     var modellaExtender,
         extensionProperties = ["parents", "children"],
         extendedFunctions = {},
-        sanitizeCallback = modella.utilities.sanitizeCallback;
+
+        sanitizeCallback = modella.utilities.sanitizeCallback,
+        findRecordById = modella.extension.findRecordById,
+        getRelativesList = modella.extension.getRelativesList;
 
     /*
     * Revise-related functions
     */
-
-    //Compile an object with parent/child name values as keys for testing
-    function getRelativesList(model){
-        var key,
-            relativesList = {},
-            index;
-
-        model.parents = (model.parents) ? model.parents : [];
-        model.children = (model.children) ? model.children : [];
-
-        for(index in model.parents){
-            key = model.parents[index].name;
-            relativesList[key] = 'parent';
-        }
-
-        for(index in model.children){
-            key = model.children[index].name;
-            relativesList[key] = 'child';
-        }
-
-        return relativesList;
-    }
-
-    //Locate record matching id in set of records
-    function findMatchingRecord(id, recordSet){
-        var matchingRecord = null;
-
-        for(var index in recordSet){
-            if(recordSet[index].id && recordSet[index].id === id){
-                matchingRecord = recordSet[index];
-                break;
-            }
-        }
-
-        return matchingRecord;
-    }
 
     //Update a set of models with a set of updated values
     function updateRelativeSet(modelArray, updateArray){
@@ -60,7 +27,8 @@
                 continue;
             }
 
-            matchingRecord = findMatchingRecord(modelArray[index].id, updateArray);
+            matchingRecord = findRecordById(updateArray, modelArray[index].id);
+            //matchingRecord = findMatchingRecord(modelArray[index].id, updateArray);
 
             if(matchingRecord !== null){
                 modelArray[index].revise(matchingRecord);

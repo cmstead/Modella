@@ -1,4 +1,4 @@
-/*global describe,it,expect,modella*/
+/*global jasmine,describe,it,expect,modella*/
 
 describe('modella.extension', function(){
     'use strict';
@@ -124,4 +124,103 @@ describe('modella.extension', function(){
         });
 
     });
+
+    describe('buildDataAppender', function(){
+
+        it('should be a function', function(){
+            expect(typeof modella.extension.buildDataAppender).toBe('function');
+        });
+
+        it('should return a function', function(){
+            var returnedValue = modella.extension.buildDataAppender({}, '');
+
+            expect(typeof returnedValue).toBe('function');
+        });
+
+        it('should return a function that updates key in passed object with new data', function(){
+            var testObject = {},
+                expectedResult = {
+                    test: "testData"
+                },
+                returnedFunction = modella.extension.buildDataAppender(testObject, "test");
+
+            returnedFunction("testData");
+
+            expect(JSON.stringify(testObject)).toBe(JSON.stringify(expectedResult));
+        });
+
+        it('should return a function that does not update data object when new data is null', function(){
+            var testObject = {
+                    test: 'testData'
+                },
+                expectedResult = {
+                    test: "testData"
+                },
+                returnedFunction = modella.extension.buildDataAppender(testObject, "test");
+
+            returnedFunction(null);
+
+            expect(JSON.stringify(testObject)).toBe(JSON.stringify(expectedResult));
+        });
+
+        it('should return a function that calls the passed callback', function(){
+            var testObject = {},
+                callback = jasmine.createSpy('passedCallback'),
+                returnedFunction = modella.extension.buildDataAppender(testObject, '', callback);
+
+            returnedFunction(null, {});
+
+            expect(callback).toHaveBeenCalled();
+        });
+    });
+
+    describe('verifyObjectIsValid', function(){
+
+        it('should be a function', function(){
+            expect(typeof modella.extension.verifyObjectIsValid).toBe('function');
+        });
+
+        it('should return true if object exists', function(){
+            var returnedValue = modella.extension.verifyObjectIsValid({});
+
+            expect(returnedValue).toBe(true);
+        });
+
+        it('should return false if object is an array and the array contains no elements', function(){
+            var dataObject = [],
+                returnedValue = modella.extension.verifyObjectIsValid(dataObject);
+
+            expect(returnedValue).toBe(false);
+        });
+
+    });
+
+    describe('buildSafeObject', function(){
+
+        it('should be a function', function(){
+            expect(typeof modella.extension.buildSafeObject).toBe('function');
+        });
+
+        it('should return an object that matches the signature of the passed object', function(){
+            var originalObject = {
+                    property1: "property1",
+                    property2: {}
+                },
+                returnedObject = modella.extension.buildSafeObject(originalObject);
+
+            expect(JSON.stringify(returnedObject)).toBe(JSON.stringify(originalObject));
+        });
+
+        it('should return an object that is not pointed at the original object', function(){
+            var originalObject = {
+                    property1: "property1",
+                    property2: {}
+                },
+                returnedObject = modella.extension.buildSafeObject(originalObject);
+
+            expect(returnedObject).not.toBe(originalObject);
+        });
+
+    });
+
 });

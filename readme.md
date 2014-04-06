@@ -62,8 +62,3 @@ Future release
 - [x] Core API documentation
 - [x] Extension layer documentation
 - [ ] Configuration layer documentation
-
-**Chores**
-
-- [ ] Pull enclosed functions out of modella extender and into modella extensionUtilities object
-- [ ] Wrap all functions lifted out of modella extender in tests

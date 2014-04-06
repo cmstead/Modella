@@ -3,15 +3,16 @@
   <component name="ChangeListManager">
     <list default="true" id="416bcc71-5d5b-4244-9454-3821424ed305" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/readme.md" afterPath="$PROJECT_DIR$/readme.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Modella.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="416bcc71-5d5b-4244-9454-3821424ed305" time="1396734414639" ignored="false" />
+    <file path="/Dummy.txt" changelist="416bcc71-5d5b-4244-9454-3821424ed305" time="1396764102180" ignored="false" />
     <file path="/modella.js" changelist="416bcc71-5d5b-4244-9454-3821424ed305" time="1396646718075" ignored="false" />
     <file path="/SpecRunner.html" changelist="416bcc71-5d5b-4244-9454-3821424ed305" time="1396735182779" ignored="false" />
     <file path="/modella_spec.js" changelist="416bcc71-5d5b-4244-9454-3821424ed305" time="1395174770006" ignored="false" />
     <file path="/a.dummy" changelist="416bcc71-5d5b-4244-9454-3821424ed305" time="1396761385872" ignored="false" />
-    <file path="/readme.md" changelist="416bcc71-5d5b-4244-9454-3821424ed305" time="1396648723110" ignored="false" />
+    <file path="/readme.md" changelist="416bcc71-5d5b-4244-9454-3821424ed305" time="1396764233411" ignored="false" />
     <file path="/modella.abstraction.js" changelist="416bcc71-5d5b-4244-9454-3821424ed305" time="1394571374491" ignored="false" />
     <file path="/modella.abstraction_spec.js" changelist="416bcc71-5d5b-4244-9454-3821424ed305" time="1394570026894" ignored="false" />
     <file path="/modella.extended.object_spec.js" changelist="416bcc71-5d5b-4244-9454-3821424ed305" time="1396589874626" ignored="false" />
@@ -45,7 +46,7 @@
       <file leaf-file-name="readme.md" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/readme.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="64" column="0" selection-start="2348" selection-end="2348" vertical-scroll-proportion="0.55716354">
+            <state line="44" column="0" selection-start="1773" selection-end="1773" vertical-scroll-proportion="0.51007557">
               <folding />
             </state>
           </provider>
@@ -194,8 +195,8 @@
     <property name="options.lastSelected" value="Settings.JavaScript.Linters.JSHint" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src" />
     <property name="FullScreen" value="false" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -237,7 +238,6 @@
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.12530413" sideWeight="0.49969456" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22785583" sideWeight="0.87469584" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -248,6 +248,7 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.12530413" sideWeight="0.49969456" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -341,9 +342,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/spec/SpecRunner.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="74" selection-start="677" selection-end="677" vertical-scroll-proportion="0.27272728">
-          <folding />
-        </state>
+        <state line="14" column="74" selection-start="677" selection-end="677" vertical-scroll-proportion="0.27272728" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/spec/modella.extension.functions_spec.js">
@@ -535,7 +534,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/readme.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="64" column="0" selection-start="2348" selection-end="2348" vertical-scroll-proportion="0.55716354">
+        <state line="44" column="0" selection-start="1773" selection-end="1773" vertical-scroll-proportion="0.51007557">
           <folding />
         </state>
       </provider>

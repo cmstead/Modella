@@ -30,10 +30,6 @@ Wishlist and Chores
 - [x] Model.revise for batch modifying values
 - [x] Model.copy for producing a data-only model copy
 
-Future release
-
-- [ ] Save only on dirty
-
 **Modella extension object**
 
 - [x] Model instantiation abstraction layer
@@ -46,19 +42,9 @@ Future release
 
 Future release
 
-- [ ] Recursive saveAll -- Depends on core feature: only save on dirty
-- [ ] Recursive deleteAll
 - [ ] Recursive copy behavior
-
-**Modella configuration object**
-
-- [ ] Inheritable base configuration object
-- [ ] Configuration export/import for parent/child handling
-- [ ] Depth of model construction parameter and management
-- [ ] Extend modella.extender init function to lazy load next-level configurations
 
 **Documentation**
 
 - [x] Core API documentation
 - [x] Extension layer documentation
-- [ ] Configuration layer documentation

@@ -1,4 +1,3 @@
-/*global modella*/
 (function($window){
     'use strict';
 
@@ -296,6 +295,152 @@
 
 })(window);
 
+/*global modella*/
+
+(function($window){
+    'use strict';
+
+    var sanitizeCallback = modella.utilities.sanitizeCallback;
+
+    /*
+     * Appends a set of data to the original dataset passed in
+     * @param (object) originalSet - original dataset to append to
+     * @param (object) newSet - dataset to append to originalSet
+     * @returns (object) extended originalSet
+     */
+    function appendSet(originalSet, newSet){
+        newSet = (newSet) ? newSet : [];
+
+        for(var key in newSet){
+            originalSet[key] = newSet[key];
+        }
+
+        return originalSet;
+    }
+
+    /*
+     * Builds a data appender function to pass as a callback
+     * @param (object) dataObject - data object to append data to
+     * @param (string) key - object key for data appending
+     * @param (function) callback - callback to execute after appending data
+     * @returns (function) dataAppender
+     */
+    function buildDataAppender(dataObject, key, callback){
+        var sanitizedCallback = sanitizeCallback(callback);
+
+        return function(data, error){
+            if(data !== null){
+                dataObject[key] = data;
+            }
+
+            sanitizedCallback(data, error);
+        };
+    }
+
+    /*
+     * Compiles a list of relative objectnames and relative type as specified
+     * Not exposed to the world as this is an abstraction for reused code in getRelativesList
+     * @param (object) relativeSet - dataset of parent/child data
+     * @param (string) relativeType - type of relative data
+     * @returns (object) relative set if relatives exist, empty object if none exist
+     */
+    function compileRelativeList(relativeSet, relativeType){
+        var relativeList = {};
+
+        relativeSet = (relativeSet) ? relativeSet : [];
+
+        for(var key in relativeSet){
+            var relativeName = relativeSet[key].name;
+            relativeList[relativeName] = relativeType;
+        }
+
+        return relativeList;
+    }
+
+    /*
+     * Locates record in dataset with matching id if record exists
+     * @param (object) dataSet - set of records to search
+     * @param (string) id - id to locate
+     * @returns (object) record with matching id if found, null if not
+     */
+    function findRecordById(dataSet, id){
+        var record = null;
+
+        dataSet = (dataSet) ? dataSet : [];
+
+        for(var key in dataSet){
+            if(dataSet[key].id && dataSet[key].id === id){
+                record = dataSet[key];
+                break;
+            }
+        }
+
+        return record;
+    }
+
+    /*
+     * Compiles a list of names of parents and children in model
+     * @param (object) model - data model to build list from
+     * @returns (object) key/value set of names and types of relatives
+     */
+    function getRelativesList(model){
+        var relativesList = {},
+            parentList = compileRelativeList(model.parents, 'parent'),
+            childList = compileRelativeList(model.children, 'child');
+
+        relativesList = appendSet(relativesList, parentList);
+        relativesList = appendSet(relativesList, childList);
+
+        return relativesList;
+    }
+
+    /*
+     * It verifies object exists and, if it's an array, that it contains elements
+     * @param (object) dataObject
+     * @returns (boolean) needsInitialization
+     */
+    function verifyObjectIsValid(dataObject){
+        var isValid = (dataObject) ? true : false;
+
+        if(Object.prototype.toString.call(dataObject) === '[object Array]' && !dataObject.length){
+            isValid = false;
+        }
+
+        return isValid;
+    }
+
+    /*
+     * Builds a new object wrapper around pointers to passed object
+     * @param (object) dataObject - object to create pointers into
+     * @returns (object) safeDataObject - an object from which pointers can be removed
+     */
+    function buildSafeObject(dataObject){
+        var safeObject = {};
+
+        dataObject = (dataObject) ? dataObject : {};
+
+        for(var key in dataObject){
+            if(dataObject.hasOwnProperty(key)){
+                safeObject[key] = dataObject[key];
+            }
+        }
+
+        return safeObject;
+    }
+
+    $window.modella.extension = {
+        appendSet: appendSet,
+        buildDataAppender: buildDataAppender,
+        buildSafeObject: buildSafeObject,
+        findRecordById: findRecordById,
+        getRelativesList: getRelativesList,
+        verifyObjectIsValid: verifyObjectIsValid
+    };
+
+})(window);
+
+/*global modella*/
+
 (function($window){
     'use strict';
 
@@ -303,60 +448,28 @@
     var modellaExtender,
         extensionProperties = ["parents", "children"],
         extendedFunctions = {},
+
+        buildDataAppender = modella.extension.buildDataAppender,
+        buildSafeObject = modella.extension.buildSafeObject,
+        checkRelativeNeedsInitialization = modella.extension.verifyObjectIsValid,
+        findRecordById = modella.extension.findRecordById,
+        getRelativesList = modella.extension.getRelativesList,
         sanitizeCallback = modella.utilities.sanitizeCallback;
 
     /*
      * Revise-related functions
      */
 
-    //Compile an object with parent/child name values as keys for testing
-    function getRelativesList(model){
-        var key,
-            relativesList = {},
-            index;
-
-        model.parents = (model.parents) ? model.parents : [];
-        model.children = (model.children) ? model.children : [];
-
-        for(index in model.parents){
-            key = model.parents[index].name;
-            relativesList[key] = 'parent';
-        }
-
-        for(index in model.children){
-            key = model.children[index].name;
-            relativesList[key] = 'child';
-        }
-
-        return relativesList;
-    }
-
-    //Locate record matching id in set of records
-    function findMatchingRecord(id, recordSet){
-        var matchingRecord = null;
-
-        for(var index in recordSet){
-            if(recordSet[index].id && recordSet[index].id === id){
-                matchingRecord = recordSet[index];
-                break;
-            }
-        }
-
-        return matchingRecord;
-    }
-
-    //Update a set of models with a set of updated values
+    /*
+     * Update a set of models with a set of updated values
+     * @param (array) modelArray - an array of initialized data models
+     * @param (array) updateArray - an array of data to update the data model
+     */
     function updateRelativeSet(modelArray, updateArray){
-        var matchingRecord = null;
+        modelArray = (modelArray) ? modelArray : [];
 
-        //This is not the most efficient way to go about this.
         for(var index in modelArray){
-
-            if(!modelArray[index].id){
-                continue;
-            }
-
-            matchingRecord = findMatchingRecord(modelArray[index].id, updateArray);
+            var matchingRecord = (modelArray[index].id) ? findRecordById(updateArray, modelArray[index].id) : null;
 
             if(matchingRecord !== null){
                 modelArray[index].revise(matchingRecord);
@@ -368,7 +481,7 @@
     function updateRelative(modelObj, updateObj){
         if(Object.prototype.toString.call(modelObj) === '[object Array]'){
             updateRelativeSet(modelObj, updateObj);
-        } else {
+        } else if(modelObj) {
             modelObj.revise(updateObj);
         }
     }
@@ -383,21 +496,6 @@
      * based upon the type of relative requested.
      *
      */
-
-    //Curries a function to handle appending data to the existing object
-    function buildDataAppenderCallback(object, key, passedCallback){
-        var localCallback = sanitizeCallback(passedCallback);
-
-        function callback(data, error){
-            if(data !== null){
-                object[key] = data;
-            }
-
-            localCallback(object[key], error);
-        }
-
-        return callback;
-    }
 
     function getBaseConfig($model, objectType, name){
         var configLocation = (objectType === 'parent') ? "parents" : "children",
@@ -422,14 +520,6 @@
         }
     }
 
-    //Checks need for initialization
-    function checkRelativeNeedsInitialization(relativeObject){
-        var needsInitialization = typeof relativeObject === 'object';
-
-        return (Object.prototype.toString.call(relativeObject) === '[object Array]' && !relativeObject.length) ?
-            false : needsInitialization;
-    }
-
     //Generic function for requesting either children or parents of current model
     function getRelatives(dataConfigArray, $modelObj, passedCallback){
         var modelExtender = modella.extender,
@@ -442,7 +532,7 @@
         for(var index in dataConfigArray){
 
             tempRecord = dataConfigArray[index];
-            tempCallback = buildDataAppenderCallback($modelObj, tempRecord.name, passedCallback);
+            tempCallback = buildDataAppender($modelObj, tempRecord.name, passedCallback);
             tempConfig = tempRecord.baseConfig;
 
             setInitialCondition(tempConfig, tempRecord, $modelObj);
@@ -466,7 +556,7 @@
 
         if(typeof $relativeObject[0] !== 'undefined'){
             for(key in $relativeObject){
-                callback = buildDataAppenderCallback($relativeObject, key);
+                callback = buildDataAppender($relativeObject, key);
                 initializeObject(baseConfig, $relativeObject[key], callback);
             }
         } else {
@@ -496,21 +586,9 @@
      * Extended copy functionality to ensure proper copy and save behavior of data
      */
 
-    function createSafeModel(model){
-        var safeModel = {};
-
-        for(var key in model){
-            if(model.hasOwnProperty(key)){
-                safeModel[key] = model[key];
-            }
-        }
-
-        return safeModel;
-    }
-
     //Remove relatives from model
     function cleanRelatives(model, relativeType){
-        var safeModel = createSafeModel(model);
+        var safeModel = buildSafeObject(model);
 
         for(var key in model[relativeType]){
             var relativeKey = model[relativeType][key].name;

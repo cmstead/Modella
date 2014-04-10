@@ -153,6 +153,8 @@
                 this.initById(this.modelConfig.initialId, localCallback);
             } else if(typeof this.modelConfig.initialParentId !== 'undefined') {
                 this.initByParentId(this.modelConfig.initialParentId, localCallback);
+            } else if(typeof this.modelConfig.initialQuery !== 'undefined') {
+                this.initByQuery(this.modelConfig.initialQuery, localCallback);
             } else if(typeof this.modelConfig.initialIds !== 'undefined') {
                 this.initByIds(this.modelConfig.initialIds, localCallback);
             } else {
@@ -281,6 +283,38 @@
             }
 
             passedCallback(modelObject);
+        },
+
+        //This requests a dataset from the service based on a query initial condition
+        initByQuery: function(queryString, callback){
+            var $this = this,
+                finalModelSet = [],
+                passedCallback = sanitizeCallback(callback),
+                pushModel = function(model){
+                    finalModelSet.push(model);
+                },
+                afterGet = sanitizeInterceptor(this.modelConfig.afterGet),
+
+                prepareModelSet = function(dataSet){
+                    var index = -1;
+
+                    while(typeof dataSet[++index] !== 'undefined'){
+                        dataSet[index] = afterGet(dataSet[index]);
+                        $this.initByObject(dataSet[index], pushModel);
+                    }
+                },
+
+                localCallback = function(modelSet, error){
+                    if(modelSet !== null){
+                        prepareModelSet(modelSet);
+                        passedCallback(finalModelSet);
+                    } else {
+                        passedCallback(null, error);
+                    }
+                };
+
+
+            this.modelConfig.service.query(queryString, localCallback);
         }
 
     };

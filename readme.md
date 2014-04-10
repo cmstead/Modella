@@ -48,3 +48,7 @@ Future release
 
 - [x] Core API documentation
 - [x] Extension layer documentation
+
+**Chores**
+
+- [ ] Refactor repeated code in initByQuery and initByParentId

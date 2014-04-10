@@ -1,3 +1,4 @@
+/*global modella,jasmine,describe,beforeEach,it,expect,spyOn*/
 describe('Modella', function(){
     'use strict';
 
@@ -74,6 +75,16 @@ describe('Modella', function(){
             var spyHandle = spyOn($modella, 'initByParentId');
 
             $modella.modelConfig.initialParentId = '1234';
+
+            $modella.init();
+
+            expect(spyHandle).toHaveBeenCalled();
+        });
+
+        it('should call initByQuery when configuration contains an initialQuery', function(){
+            var spyHandle = spyOn($modella, 'initByQuery');
+
+            $modella.modelConfig.initialQuery = 'query test';
 
             $modella.init();
 
@@ -386,6 +397,88 @@ describe('Modella', function(){
             $modella.initByObject({});
 
             expect(initModelSpy).toHaveBeenCalled();
+        });
+
+    });
+
+    describe('initByQuery', function(){
+
+        var afterGetTester;
+
+        beforeEach(function(){
+            afterGetTester = jasmine.createSpy('afterGet');
+
+            $modella.modelConfig.service = {
+                query: function(queryParams, callback){
+                    callback([
+                        {},
+                        {},
+                        {}
+                    ]);
+                }
+            };
+
+            $modella.modelConfig.afterGet = function(dataObj){
+                afterGetTester();
+                return dataObj;
+            };
+        });
+
+        it('should be a function', function(){
+            expect(typeof $modella.initByQuery).toBe('function');
+        });
+
+        it('should call service query', function(){
+            var spyHandle = spyOn($modella.modelConfig.service, 'query');
+
+            $modella.initByQuery('query');
+
+            expect(spyHandle).toHaveBeenCalled();
+        });
+
+        it('should call the passed callback', function(){
+            var callback = jasmine.createSpy('passedCallback');
+
+            $modella.initByQuery("", callback);
+
+            expect(callback).toHaveBeenCalled();
+        });
+
+        it('should call the passed callback with null and an error when the service fails', function(){
+            var passedCallback = jasmine.createSpy('passedCallbcak');
+
+            $modella.modelConfig.service.query = function(id, callback){
+                callback(null, 'This is an error');
+            }
+
+            $modella.initByQuery('', passedCallback);
+
+            expect(passedCallback).toHaveBeenCalledWith(null, 'This is an error');
+        });
+
+        it('should call initByObject 3 times when getByParentId returns a 3 element array', function(){
+            var spyHandle = spyOn($modella, 'initByObject');
+
+            $modella.initByQuery('1234abc');
+
+            expect(spyHandle.calls.count()).toBe(3);
+        });
+
+        it("should return an array of 3 model objects", function(){
+            var returnedValue,
+                callback = function(modelSet){
+                    returnedValue = modelSet;
+                };
+
+            $modella.initByQuery('', callback);
+
+            expect(returnedValue.length).toBe(3);
+        });
+
+        it("should call afterGet 3 times", function(){
+            $modella.initByQuery('');
+
+            expect(afterGetTester.calls.count()).toBe(3);
         });
 
     });

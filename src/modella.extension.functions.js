@@ -6,11 +6,11 @@
     var sanitizeCallback = modella.utilities.sanitizeCallback;
 
     /*
-    * Appends a set of data to the original dataset passed in
-    * @param (object) originalSet - original dataset to append to
-    * @param (object) newSet - dataset to append to originalSet
-    * @returns (object) extended originalSet
-    */
+     * Appends a set of data to the original dataset passed in
+     * @param (object) originalSet - original dataset to append to
+     * @param (object) newSet - dataset to append to originalSet
+     * @returns (object) extended originalSet
+     */
     function appendSet(originalSet, newSet){
         newSet = (newSet) ? newSet : [];
 
@@ -41,12 +41,12 @@
     }
 
     /*
-    * Compiles a list of relative objectnames and relative type as specified
-    * Not exposed to the world as this is an abstraction for reused code in getRelativesList
-    * @param (object) relativeSet - dataset of parent/child data
-    * @param (string) relativeType - type of relative data
-    * @returns (object) relative set if relatives exist, empty object if none exist
-    */
+     * Compiles a list of relative objectnames and relative type as specified
+     * Not exposed to the world as this is an abstraction for reused code in getRelativesList
+     * @param (object) relativeSet - dataset of parent/child data
+     * @param (string) relativeType - type of relative data
+     * @returns (object) relative set if relatives exist, empty object if none exist
+     */
     function compileRelativeList(relativeSet, relativeType){
         var relativeList = {};
 
@@ -61,11 +61,11 @@
     }
 
     /*
-    * Locates record in dataset with matching id if record exists
-    * @param (object) dataSet - set of records to search
-    * @param (string) id - id to locate
-    * @returns (object) record with matching id if found, null if not
-    */
+     * Locates record in dataset with matching id if record exists
+     * @param (object) dataSet - set of records to search
+     * @param (string) id - id to locate
+     * @returns (object) record with matching id if found, null if not
+     */
     function findRecordById(dataSet, id){
         var record = null;
 
@@ -82,10 +82,10 @@
     }
 
     /*
-    * Compiles a list of names of parents and children in model
-    * @param (object) model - data model to build list from
-    * @returns (object) key/value set of names and types of relatives
-    */
+     * Compiles a list of names of parents and children in model
+     * @param (object) model - data model to build list from
+     * @returns (object) key/value set of names and types of relatives
+     */
     function getRelativesList(model){
         var relativesList = {},
             parentList = compileRelativeList(model.parents, 'parent'),
@@ -98,10 +98,10 @@
     }
 
     /*
-    * It verifies object exists and, if it's an array, that it contains elements
-    * @param (object) dataObject
-    * @returns (boolean) needsInitialization
-    */
+     * It verifies object exists and, if it's an array, that it contains elements
+     * @param (object) dataObject
+     * @returns (boolean) needsInitialization
+     */
     function verifyObjectIsValid(dataObject){
         var isValid = (dataObject) ? true : false;
 
@@ -113,10 +113,10 @@
     }
 
     /*
-    * Builds a new object wrapper around pointers to passed object
-    * @param (object) dataObject - object to create pointers into
-    * @returns (object) safeDataObject - an object from which pointers can be removed
-    */
+     * Builds a new object wrapper around pointers to passed object
+     * @param (object) dataObject - object to create pointers into
+     * @returns (object) safeDataObject - an object from which pointers can be removed
+     */
     function buildSafeObject(dataObject){
         var safeObject = {};
 

@@ -1,4 +1,7 @@
+/*global jasmine,describe,beforeEach,it,expect*/
 describe('Modella returned object', function(){
+    'use strict';
+
     var $modella,
         dataService,
         configAttributes,

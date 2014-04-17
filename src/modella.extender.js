@@ -173,7 +173,7 @@
             delete amendedModel.children;
             delete amendedModel.baseConfig;
 
-            originalCopy(amendedModel);
+            return originalCopy(amendedModel);
         };
 
         return model;

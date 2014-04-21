@@ -173,10 +173,12 @@
         //This preps a bare data object for model calls
         initByObject: function(modelObject, callback){
             var passedCallback = sanitizeCallback(callback),
+                afterInit = sanitizeInterceptor(this.modelConfig.afterInit);
 
-                localCallback = function(model){
-                    passedCallback(model);
-                };
+            function localCallback(model){
+                model = afterInit(model);
+                passedCallback(model);
+            }
 
             this.initModel(modelObject, localCallback);
         },

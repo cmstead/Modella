@@ -179,6 +179,21 @@
         return model;
     }
 
+    //Rcopies (see rcopy) model data in array if array exists
+    function rcopyModelArray(modelArray){
+        var finalArray = (modelArray) ? [] : undefined,
+            returnedCopy;
+
+        if(modelArray){
+            for(var key in modelArray){
+                returnedCopy = modelArray[key].rcopy();
+                finalArray.push(returnedCopy);
+            }
+        }
+
+        return finalArray;
+    }
+
     /*
     * Defining extended functionality to append to the initialized model
     */
@@ -204,6 +219,22 @@
                 updateRelative(this[key], updateObj[key]);
             }
         }
+    };
+
+    extendedFunctions.rcopy = function(){
+        var $modelCopy = this.copy(),
+            returnedCopy,
+            childKey;
+
+        if(this.children){
+            for(var key in this.children){
+                childKey = this.children[key].name;
+                returnedCopy = rcopyModelArray(this[childKey]);
+                $modelCopy[childKey] = returnedCopy;
+            }
+        }
+
+        return $modelCopy;
     };
 
     /*

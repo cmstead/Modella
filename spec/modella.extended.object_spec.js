@@ -1,23 +1,28 @@
+/*global describe,beforeEach,it,expect,modella,jasmine*/
+
 describe("Modella extended object", function(){
+    'use strict';
 
     var $model,
-        $modelConfig;
+        $modelConfig,
+        $mockService;
 
     beforeEach(function(){
         var $modellaWrapper = modella.extender,
+            $initialObject = {
+                id: '1234',
+                parent_id: '1234a'
+            };
 
-            $mockService = {
+
+        $mockService = {
                 del: jasmine.createSpy("service.delete"),
                 get: jasmine.createSpy("service.get"),
                 getByParentId: jasmine.createSpy("service.getByParentId"),
                 post: jasmine.createSpy("service.post"),
                 put: jasmine.createSpy("service.put")
-            },
-
-            $initialObject = {
-                id: '1234',
-                parent_id: '1234a'
             };
+
 
         $modelConfig = {
             parents: [{
@@ -39,7 +44,7 @@ describe("Modella extended object", function(){
 
         function callback(returnedModel, $error){
             $model = returnedModel;
-        };
+        }
 
         $modellaWrapper.init($modelConfig, callback);
     });
@@ -200,6 +205,74 @@ describe("Modella extended object", function(){
 
             expect(functionsExist).toBe(true);
         });
+    });
+
+    describe("rcopy (recursive copy)", function(){
+
+        var $model;
+
+        beforeEach(function(){
+            var $modellaWrapper = modella.extender,
+                childConfig = {
+                    service: $mockService
+                },
+                initialObject = {
+                    id: '1',
+                    name: 'testObject',
+                    dataStr: 'some random string',
+                    kids: [
+                        {
+                            id: '23',
+                            blah: 'blar'
+                        },
+                        {
+                            id: '34',
+                            blah: 'bloo'
+                        }
+                    ]
+                },
+                parentConfig = {
+                    service: $mockService,
+                    children: [{
+                        name: 'kids',
+                        baseConfig: childConfig
+                    }],
+
+                    initialObject: initialObject
+                };
+
+            $modellaWrapper.init(parentConfig, function(data){
+                $model = data;
+            });
+        });
+
+        it('should be a function', function(){
+            expect(typeof $model.rcopy).toBe('function');
+        });
+
+        it('should return a copied top level object', function(){
+            var returnedData = $model.rcopy();
+
+            expect(returnedData.id).toBe('1');
+        });
+
+        it('should return copies of the child layers', function(){
+            var returnedData = $model.rcopy();
+
+            expect(returnedData.kids.length).toBe(2);
+        });
+
+        it('should call rcopy on the child models', function(){
+            var rcopySpy = jasmine.createSpy('rcopy');
+
+            $model.kids[0].rcopy = rcopySpy;
+            $model.kids[1].rcopy = rcopySpy;
+
+            $model.rcopy();
+
+            expect(rcopySpy.calls.count()).toBe(2);
+        });
+
     });
 
 });

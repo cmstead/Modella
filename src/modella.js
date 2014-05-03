@@ -57,10 +57,9 @@
                         passedCallback = sanitizeCallback(callback),
                         $model = this.copy(this),
 
-                        localCallback = function(id, error){
-                            if(id !== null){
-                                $this.id = id;
-                                passedCallback($model);
+                        localCallback = function(data, error){
+                            if(data){
+                                passedCallback(data);
                             } else {
                                 passedCallback(null, error);
                             }
@@ -82,7 +81,7 @@
 
                         localCallback = function(data, error){
                             if(data !== null){
-                                sanitizedCallback($model);
+                                sanitizedCallback(data);
                             } else {
                                 sanitizedCallback(null, error);
                             }

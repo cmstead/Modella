@@ -463,13 +463,69 @@
         return safeObject;
     }
 
+    /*
+     * Pluralizes a word for checking against object types
+     * @param (string) word - string to pluralize
+     * @returns (string) pluralizedWord
+     */
+    function pluralize(word){
+        var lastChar;
+
+        word = (typeof word === 'string') ? word : '';
+        lastChar = word.substring(word.length - 1);
+
+        if(lastChar.toLowerCase() === 'y'){
+            word = word.substr(0, word.length - 1) + "ie";
+        }
+
+        return word + 's';
+    }
+
+    /*
+     * Verifies if conditions match a provided object
+     * @param (object) testObject
+     * @param (object) conditions
+     * @returns (boolean)
+     */
+    function validateObject(testObject, conditions){
+        var verified = true;
+
+        for(var key in conditions){
+            verified = (testObject[key] !== conditions[key]) ? false : verified;
+        }
+
+        return verified;
+    }
+
+    /*
+     * Finds object in collection based on passed conditions
+     * @param (collection) objectCollection
+     * @param (object) conditions
+     * @returns (object) object or null
+     */
+    function find(objectCollection, conditions){
+        var result = null;
+
+        for(var key in objectCollection){
+            if(validateObject(objectCollection[key], conditions)){
+                result = objectCollection[key];
+                break;
+            }
+        }
+
+        return result;
+    }
+
     $window.modella.extension = {
         appendSet: appendSet,
         buildDataAppender: buildDataAppender,
         buildSafeObject: buildSafeObject,
         findRecordById: findRecordById,
         getRelativesList: getRelativesList,
-        verifyObjectIsValid: verifyObjectIsValid
+        verifyObjectIsValid: verifyObjectIsValid,
+        validateObject: validateObject,
+        pluralize: pluralize,
+        find: find
     };
 
 })(window);
@@ -489,11 +545,26 @@
         checkRelativeNeedsInitialization = modella.extension.verifyObjectIsValid,
         findRecordById = modella.extension.findRecordById,
         getRelativesList = modella.extension.getRelativesList,
-        sanitizeCallback = modella.utilities.sanitizeCallback;
+        sanitizeCallback = modella.utilities.sanitizeCallback,
+        pluralize = modella.extension.pluralize,
+        find = modella.extension.find;
 
     /*
-     * Revise-related functions
+     * Find-related functions
      */
+    function findInArray(objectArray, key, conditions){
+        var result;
+
+        for(var index in objectArray){
+            if(result){
+                break;
+            }
+
+            result = objectArray[index].find(key, conditions);
+        }
+
+        return result;
+    }
 
     /*
      * Update a set of models with a set of updated values
@@ -711,6 +782,50 @@
         }
 
         return $modelCopy;
+    };
+
+    extendedFunctions.find = function(key, conditions){
+        var result,
+            pluralKey = pluralize(key),
+            childDefinition = find(this.children, { name: pluralKey }),
+            childKey;
+
+        result = (childDefinition) ? find(this[pluralKey], conditions) : null;
+
+        for(var index in this.children){
+            if(result){
+                break;
+            }
+
+            childKey = this.children[index].name;
+
+            if(this.testNodeType(key, this.children[index].baseConfig.children)){
+                result = findInArray(this[childKey], key, conditions);
+            }
+        }
+
+        return result;
+    };
+
+    extendedFunctions.testNodeType = function(key, childArray){
+        var nodeTypeExists,
+            collectionKey = pluralize(key);
+
+        childArray = (childArray) ? childArray : this.children;
+
+        nodeTypeExists = find(childArray, { name: collectionKey }) !== null;
+
+        for(var index in childArray){
+            if(nodeTypeExists){
+                break;
+            }
+
+            nodeTypeExists = (childArray[index].baseConfig.children) ?
+                this.testNodeType(key, childArray[index].baseConfig.children) :
+                nodeTypeExists;
+        }
+
+        return nodeTypeExists;
     };
 
     /*

@@ -275,4 +275,173 @@ describe("Modella extended object", function(){
 
     });
 
+    describe("find", function(){
+
+        var $model;
+
+        beforeEach(function(){
+            var $modellaWrapper = modella.extender,
+                initialObject = {
+                    id: '1',
+                    name: 'testObject',
+                    dataStr: 'some random string',
+                    kids: [
+                        {
+                            id: '23',
+                            blah: 'blar',
+                            vals: [
+                                {
+                                    id: '24',
+                                    name: ''
+                                }
+                            ]
+                        },
+                        {
+                            id: '34',
+                            blah: 'bloo'
+                        }
+                    ]
+                },
+                testConfig = {
+                    service: $mockService
+                },
+                valConfig = {
+                    service: $mockService
+                },
+                childConfig = {
+                    service: $mockService,
+                    children: [{
+                        name: 'vals',
+                        baseConfig: valConfig
+                    }]
+                },
+                parentConfig = {
+                    service: $mockService,
+                    children: [
+                        {
+                            name: 'kids',
+                            baseConfig: childConfig
+                        },
+                        {
+                            name: 'tests',
+                            baseConfig: testConfig
+                        }
+                    ],
+
+                    initialObject: initialObject
+                };
+
+            $modellaWrapper.init(parentConfig, function(data){
+                $model = data;
+            });
+        });
+
+        it('should be a function', function(){
+            expect(typeof $model.find).toBe('function');
+        });
+
+        it('should return null if not found', function(){
+            var result = $model.find('foo', { id: '1234' });
+
+            expect(result).toBe(null);
+        });
+
+        it('should return object if condition is met', function(){
+            var result = $model.find('kid', { id: '34' });
+
+            expect(result).toBe($model.kids[1]);
+        });
+
+        it('should return an object from lower layers if no object exists at current layer', function(){
+            var result = $model.find('val', { id: '24' });
+
+            expect(result).toBe($model.kids[0].vals[0]);
+        });
+
+    });
+
+    describe("testNodeType", function(){
+
+        var $model;
+
+        beforeEach(function(){
+            var $modellaWrapper = modella.extender,
+                initialObject = {
+                    id: '1',
+                    name: 'testObject',
+                    dataStr: 'some random string',
+                    kids: [
+                        {
+                            id: '23',
+                            blah: 'blar',
+                            vals: [
+                                {
+                                    id: '24',
+                                    name: ''
+                                }
+                            ]
+                        },
+                        {
+                            id: '34',
+                            blah: 'bloo'
+                        }
+                    ]
+                },
+                testConfig = {
+                    service: $mockService
+                },
+                valConfig = {
+                    service: $mockService
+                },
+                childConfig = {
+                    service: $mockService,
+                    children: [{
+                        name: 'vals',
+                        baseConfig: valConfig
+                    }]
+                },
+                parentConfig = {
+                    service: $mockService,
+                    children: [
+                        {
+                            name: 'kids',
+                            baseConfig: childConfig
+                        },
+                        {
+                            name: 'tests',
+                            baseConfig: testConfig
+                        }
+                    ],
+
+                    initialObject: initialObject
+                };
+
+            $modellaWrapper.init(parentConfig, function(data){
+                $model = data;
+            });
+        });
+
+        it('should be a function', function(){
+            expect(typeof $model.testNodeType).toBe('function');
+        });
+
+        it('should return false if node type does not exist at or below current level', function(){
+            var nodeTypeExists = $model.testNodeType("foo");
+
+            expect(nodeTypeExists).toBe(false);
+        });
+
+        it('should return true if node type exists at current level', function(){
+            var nodeTypeExists = $model.testNodeType('kid');
+
+            expect(nodeTypeExists).toBe(true);
+        });
+
+        it('should return true if node exists below current level', function(){
+            var nodeTypeExists = $model.testNodeType('val');
+
+            expect(nodeTypeExists).toBe(true);
+        });
+    });
+
 });

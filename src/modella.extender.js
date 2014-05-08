@@ -13,11 +13,26 @@
         checkRelativeNeedsInitialization = modella.extension.verifyObjectIsValid,
         findRecordById = modella.extension.findRecordById,
         getRelativesList = modella.extension.getRelativesList,
-        sanitizeCallback = modella.utilities.sanitizeCallback;
+        sanitizeCallback = modella.utilities.sanitizeCallback,
+        pluralize = modella.extension.pluralize,
+        find = modella.extension.find;
 
     /*
-    * Revise-related functions
+    * Find-related functions
     */
+    function findInArray(objectArray, key, conditions){
+        var result;
+
+        for(var index in objectArray){
+            if(result){
+                break;
+            }
+
+            result = objectArray[index].find(key, conditions);
+        }
+
+        return result;
+    }
 
     /*
     * Update a set of models with a set of updated values
@@ -235,6 +250,50 @@
         }
 
         return $modelCopy;
+    };
+
+    extendedFunctions.find = function(key, conditions){
+        var result,
+            pluralKey = pluralize(key),
+            childDefinition = find(this.children, { name: pluralKey }),
+            childKey;
+
+        result = (childDefinition) ? find(this[pluralKey], conditions) : null;
+
+        for(var index in this.children){
+            if(result){
+                break;
+            }
+
+            childKey = this.children[index].name;
+
+            if(this.testNodeType(key, this.children[index].baseConfig.children)){
+                result = findInArray(this[childKey], key, conditions);
+            }
+        }
+
+        return result;
+    };
+
+    extendedFunctions.testNodeType = function(key, childArray){
+        var nodeTypeExists,
+            collectionKey = pluralize(key);
+
+        childArray = (childArray) ? childArray : this.children;
+
+        nodeTypeExists = find(childArray, { name: collectionKey }) !== null;
+
+        for(var index in childArray){
+            if(nodeTypeExists){
+                break;
+            }
+
+            nodeTypeExists = (childArray[index].baseConfig.children) ?
+                this.testNodeType(key, childArray[index].baseConfig.children) :
+                nodeTypeExists;
+        }
+
+        return nodeTypeExists;
     };
 
     /*
